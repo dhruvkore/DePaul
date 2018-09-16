@@ -1,7 +1,6 @@
 # DePaul
 DePaul Masters Projects
 
-
 Spring	2018
 	CSC 447 PL Concepts
 	CSC 421 Applied Algos
