@@ -1,0 +1,137 @@
+JokeServer.java
+---
+
+Dhruv's Joke Server 1.8 starting up, listening at port 4545
+Dhruv's Admin Joke Server 1.8 starting up, listening at port 4546
+Dhruv's Admin Joke Server 1.8 starting up, listening at port 4546
+From Client: FirstUser|NONE|NONE|
+Sending: JA| FirstUser | What do Italian ghosts have for dinner? Spook-hetti!
+From Client: SecondUser|NONE|NONE|
+Sending: JA| SecondUser | What do Italian ghosts have for dinner? Spook-hetti!
+From Client: FirstUser|JA,|NONE|
+Sending: JB| FirstUser | Where are fish in orbit? In trout-er space.
+From Client: SecondUser|JA,|NONE|
+Sending: JB| SecondUser | Where are fish in orbit? In trout-er space.
+From Client: SecondUser|JA,JB,|NONE|
+Sending: JC| SecondUser | I'm so good at sleeping. I can do it with my eyes closed.
+From Client: P
+Mode: PROVERB Mode
+From Client: FirstUser|JA,JB,|NONE|
+Sending: PA| FirstUser | A cat may look at a king.
+From Client: FirstUser|JA,JB,|PA,|
+Sending: PB| FirstUser | A bad penny always turns up.
+From Client: SecondUser|JA,JB,JC,|NONE|
+Sending: PA| SecondUser | A cat may look at a king.
+From Client: SecondUser|JA,JB,JC,|PA,|
+Sending: PB| SecondUser | A bad penny always turns up.
+From Client: SecondUser|JA,JB,JC,|PA,PB,|
+Sending: PC| SecondUser | A friend in need is a friend indeed.
+From Client: J
+Mode: JOKE Mode
+From Client: FirstUser|JA,JB,|PA,PB,|
+Sending: JC| FirstUser | I'm so good at sleeping. I can do it with my eyes closed.
+From Client: FirstUser|JA,JB,JC,|PA,PB,|
+Sending: JD| FirstUser | Why is Peter Pan always flying? He neverlands.
+From Client: FirstUser|JA,JB,JC,JD,|PA,PB,|
+Sending: JA| FirstUser | What do Italian ghosts have for dinner? Spook-hetti!
+From Client: SecondUser|JA,JB,JC,|PA,PB,PC,|
+Sending: JD| SecondUser | Why is Peter Pan always flying? He neverlands.
+From Client: SecondUser|JA,JB,JC,JD,|PA,PB,PC,|
+Sending: JA| SecondUser | What do Italian ghosts have for dinner? Spook-hetti!
+From Client: SecondUser|JA,|PA,PB,PC,|
+Sending: JB| SecondUser | Where are fish in orbit? In trout-er space.
+From Client: P
+Mode: PROVERB Mode
+From Client: FirstUser|JA,|PA,PB,|
+Sending: PC| FirstUser | A friend in need is a friend indeed.
+From Client: FirstUser|JA,|PA,PB,PC,|
+Sending: PD| FirstUser | A man is known by his friends.
+From Client: SecondUser|JA,JB,|PA,PB,PC,|
+Sending: PD| SecondUser | A man is known by his friends.
+From Client: SecondUser|JA,JB,|PA,PB,PC,PD,|
+Sending: PA| SecondUser | A cat may look at a king.
+
+------------------
+Joke Client Admin
+---
+
+Dhruv's Joke Client Admin, 1.8.
+
+Using server: localhost, Port: 4546
+Enter J for Joke mode or P for Proverb Mode, (quit) to end: P
+Mode: PROVERB Mode
+Enter J for Joke mode or P for Proverb Mode, (quit) to end: J
+Mode: JOKE Mode
+Enter J for Joke mode or P for Proverb Mode, (quit) to end: P
+Mode: PROVERB Mode
+Enter J for Joke mode or P for Proverb Mode, (quit) to end: 
+
+------------------
+Joke Client FirstUser
+---
+
+Dhruv's Joke Client, 1.8.
+
+Using server: localhost, Port: 4545
+Enter a Username: FirstUser
+Press enter to request joke/proverb, (quit) to end: 
+JA| FirstUser | What do Italian ghosts have for dinner? Spook-hetti!
+Press enter to request joke/proverb, (quit) to end: 
+JB| FirstUser | Where are fish in orbit? In trout-er space.
+Press enter to request joke/proverb, (quit) to end: 
+PA| FirstUser | A cat may look at a king.
+Press enter to request joke/proverb, (quit) to end: 
+PB| FirstUser | A bad penny always turns up.
+Press enter to request joke/proverb, (quit) to end: 
+JC| FirstUser | I'm so good at sleeping. I can do it with my eyes closed.
+Press enter to request joke/proverb, (quit) to end: 
+JD| FirstUser | Why is Peter Pan always flying? He neverlands.
+Press enter to request joke/proverb, (quit) to end: 
+JA| FirstUser | What do Italian ghosts have for dinner? Spook-hetti!
+Press enter to request joke/proverb, (quit) to end: 
+PC| FirstUser | A friend in need is a friend indeed.
+Press enter to request joke/proverb, (quit) to end: 
+PD| FirstUser | A man is known by his friends.
+Press enter to request joke/proverb, (quit) to end: 
+
+------------------
+Joke Client SecondUser
+---
+
+Dhruv's Joke Client, 1.8.
+
+Using server: localhost, Port: 4545
+Enter a Username: SecondUser
+Press enter to request joke/proverb, (quit) to end: 
+JA| SecondUser | What do Italian ghosts have for dinner? Spook-hetti!
+Press enter to request joke/proverb, (quit) to end: 
+JB| SecondUser | Where are fish in orbit? In trout-er space.
+Press enter to request joke/proverb, (quit) to end: 
+JC| SecondUser | I'm so good at sleeping. I can do it with my eyes closed.
+Press enter to request joke/proverb, (quit) to end: 
+PA| SecondUser | A cat may look at a king.
+Press enter to request joke/proverb, (quit) to end: 
+PB| SecondUser | A bad penny always turns up.
+Press enter to request joke/proverb, (quit) to end: 
+PC| SecondUser | A friend in need is a friend indeed.
+Press enter to request joke/proverb, (quit) to end: 
+JD| SecondUser | Why is Peter Pan always flying? He neverlands.
+Press enter to request joke/proverb, (quit) to end: 
+JA| SecondUser | What do Italian ghosts have for dinner? Spook-hetti!
+Press enter to request joke/proverb, (quit) to end: 
+JB| SecondUser | Where are fish in orbit? In trout-er space.
+Press enter to request joke/proverb, (quit) to end: 
+PD| SecondUser | A man is known by his friends.
+Press enter to request joke/proverb, (quit) to end: 
+PA| SecondUser | A cat may look at a king.
+Press enter to request joke/proverb, (quit) to end: 
+
+
+
+
+
+
+
+
+
+
