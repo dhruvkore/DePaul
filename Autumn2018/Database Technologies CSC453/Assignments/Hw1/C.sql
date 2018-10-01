@@ -94,3 +94,10 @@ FULL JOIN BYPLANE d
 ON a.tid=d.tid
 WHERE a.fare = (SELECT MIN(fare) FROM TRIPS);
 
+
+
+
+
+
+
+
