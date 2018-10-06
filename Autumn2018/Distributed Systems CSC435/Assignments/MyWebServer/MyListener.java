@@ -16,7 +16,7 @@ class Worker extends Thread {
 				String name;
 				name = in.readLine(); //Read line from client
 				System.out.println(name);
-				out.println("Server has recieved your request.")
+				out.println("Server has recieved your request.");
 			}
 			catch(IOException x){
 				System.out.println("Server read error");
@@ -29,7 +29,7 @@ class Worker extends Thread {
 	}
 }
 
-public class InetServer {
+public class MyListener {
 	public static void main(String a[]) throws IOException{
 		int q_len = 6;
 		int port = 2540;
