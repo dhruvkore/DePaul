@@ -14,8 +14,12 @@ class Worker extends Thread {
 
 			try{
 				String name;
-				name = in.readLine(); //Read line from client
-				System.out.println(name);
+				while(true){
+					name = in.readLine(); //Read line from client
+					if(name == null || name.length() == 0)
+						break;
+					System.out.println(name);
+				}
 				out.println("Server has recieved your request.");
 			}
 			catch(IOException x){
