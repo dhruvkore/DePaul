@@ -1,0 +1,21 @@
+Testsuite: tests.InvalidShippingCostTests
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.025 sec
+------------- Standard Output ---------------
+RawTotal: -3.4028235E38 ShippingMethod: Next-Day Shipping DestinationState = NC
+RawTotal: -0.01 ShippingMethod: Next-Day Shipping DestinationState = NC
+RawTotal: 0.0 ShippingMethod: Next-Day Shipping DestinationState = NC
+RawTotal: -0.01 ShippingMethod:  DestinationState = NC
+RawTotal: 0.0 ShippingMethod: null DestinationState = NC
+RawTotal: 0.0 ShippingMethod: Next-Day Shipping DestinationState = 
+RawTotal: 0.0 ShippingMethod: Next-Day Shipping DestinationState = NK
+RawTotal: 0.0 ShippingMethod: Next-Day Shipping DestinationState = null
+------------- ---------------- ---------------
+
+Testcase: shippingCostCalcTest[0] took 0.003 sec
+Testcase: shippingCostCalcTest[1] took 0.002 sec
+Testcase: shippingCostCalcTest[2] took 0.001 sec
+Testcase: shippingCostCalcTest[3] took 0.001 sec
+Testcase: shippingCostCalcTest[4] took 0.001 sec
+Testcase: shippingCostCalcTest[5] took 0 sec
+Testcase: shippingCostCalcTest[6] took 0.001 sec
+Testcase: shippingCostCalcTest[7] took 0.001 sec

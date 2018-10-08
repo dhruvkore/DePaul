@@ -1,0 +1,54 @@
+<project name="ShippingCost" default="testAll" basedir=".">
+  <description>
+    Ant build file for ShippingCost
+  </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="bin" location="bin"/>
+  <property name="junit" location="/Library/JUnit"/>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory -->
+    <mkdir dir="${bin}"/>
+  </target>
+  
+  <target name="compile" depends="init"
+          description="compile the source " >
+    <!-- Compile the java code from ${src} into ${bin} -->
+    <javac 
+		   srcdir="${src}" 
+		   destdir="${bin}" 
+		   debug="on"
+		   includeantruntime="true">
+	  <classpath location="${junit}/junit-4.12.jar"/>
+      <classpath location="${junit}/hamcrest-core-1.3.jar"/>
+
+    </javac>
+  </target>
+  
+  <target name="testAll" depends="compile"> 
+    <!-- Run junit tests -->
+    <junit printsummary="yes" fork="yes">
+      <classpath location="${bin}"/>
+      <classpath location="${junit}/junit-4.12.jar"/>
+      <classpath location="${junit}/hamcrest-core-1.3.jar"/>
+      <formatter type="plain"/>
+      <test name="tests.ValidShippingCostTests"/>
+    </junit>
+    <junit printsummary="yes" fork="yes">
+      <classpath location="${bin}"/>
+      <classpath location="${junit}/junit-4.12.jar"/>
+      <classpath location="${junit}/hamcrest-core-1.3.jar"/>
+      <formatter type="plain"/>
+      <test name="tests.InvalidShippingCostTests"/>
+    </junit>
+  </target>
+
+  <target name="clean">
+    <!-- Delete the ${bin} folder -->
+    <delete dir="${bin}"/>
+  </target>
+
+</project>

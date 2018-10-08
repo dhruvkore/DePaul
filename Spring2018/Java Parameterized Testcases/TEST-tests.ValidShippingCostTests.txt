@@ -1,0 +1,409 @@
+Testsuite: tests.ValidShippingCostTests
+Tests run: 202, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.152 sec
+------------- Standard Output ---------------
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = DE Expected: 100.0
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = HI Expected: 104.34999
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = TX Expected: 108.19
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = MA Expected: 106.25
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = MD Expected: 105.99999
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = IA Expected: 106.799995
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = ME Expected: 105.49999
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = ID Expected: 106.03
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = MI Expected: 105.99999
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = UT Expected: 106.76
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = MN Expected: 107.299995
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = MO Expected: 107.89
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = IL Expected: 108.64
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = IN Expected: 107.00001
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = MS Expected: 107.07001
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = MT Expected: 100.0
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = AK Expected: 101.76001
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = AL Expected: 109.01
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = VA Expected: 105.630005
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = AR Expected: 109.3
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = NC Expected: 106.9
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = ND Expected: 106.869995
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = NE Expected: 106.89
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = RI Expected: 107.00001
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = AZ Expected: 108.25
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = NH Expected: 100.0
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = NJ Expected: 106.850006
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = VT Expected: 106.18
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = NM Expected: 107.55
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = FL Expected: 106.799995
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = NV Expected: 107.98
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = WA Expected: 108.92
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = NY Expected: 108.490005
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = SC Expected: 107.22001
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = SD Expected: 106.39
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = WI Expected: 105.420006
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = OH Expected: 107.14001
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = GA Expected: 107.00001
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = OK Expected: 108.86
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = CA Expected: 108.25
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = WV Expected: 106.28999
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = WY Expected: 105.4
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = OR Expected: 100.0
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = KS Expected: 108.62
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = CO Expected: 107.50001
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = KY Expected: 105.99999
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = CT Expected: 106.350006
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = PA Expected: 106.340004
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = LA Expected: 109.979996
+RawTotal: 100.0 ShippingMethod: Standard Shipping DestinationState = TN Expected: 109.46
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = DE Expected: 50.0
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = HI Expected: 51.739998
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = TX Expected: 53.276
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = MA Expected: 52.5
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = MD Expected: 52.399998
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = IA Expected: 52.719997
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = ME Expected: 52.199997
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = ID Expected: 52.412
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = MI Expected: 52.399998
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = UT Expected: 52.704002
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = MN Expected: 52.92
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = MO Expected: 53.156
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = IL Expected: 53.456
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = IN Expected: 52.800003
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = MS Expected: 52.828003
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = MT Expected: 50.0
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = AK Expected: 50.704002
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = AL Expected: 53.604004
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = VA Expected: 52.252003
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = AR Expected: 53.72
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = NC Expected: 52.760002
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = ND Expected: 52.747997
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = NE Expected: 52.756
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = RI Expected: 52.800003
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = AZ Expected: 53.3
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = NH Expected: 50.0
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = NJ Expected: 52.74
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = VT Expected: 52.472
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = NM Expected: 53.02
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = FL Expected: 52.719997
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = NV Expected: 53.192
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = WA Expected: 53.568
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = NY Expected: 53.396
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = SC Expected: 52.888
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = SD Expected: 52.556
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = WI Expected: 52.168003
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = OH Expected: 52.856003
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = GA Expected: 52.800003
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = OK Expected: 53.544003
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = CA Expected: 53.3
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = WV Expected: 52.516
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = WY Expected: 52.16
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = OR Expected: 50.0
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = KS Expected: 53.447998
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = CO Expected: 53.0
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = KY Expected: 52.399998
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = CT Expected: 52.54
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = PA Expected: 52.536003
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = LA Expected: 53.992
+RawTotal: 40.0 ShippingMethod: Standard Shipping DestinationState = TN Expected: 53.783997
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = DE Expected: 125.0
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = HI Expected: 129.34999
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = TX Expected: 133.19
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = MA Expected: 131.25
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = MD Expected: 131.0
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = IA Expected: 131.79999
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = ME Expected: 130.5
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = ID Expected: 131.03
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = MI Expected: 131.0
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = UT Expected: 131.76001
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = MN Expected: 132.29999
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = MO Expected: 132.89
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = IL Expected: 133.64
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = IN Expected: 132.0
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = MS Expected: 132.07
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = MT Expected: 125.0
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = AK Expected: 126.76001
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = AL Expected: 134.01001
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = VA Expected: 130.63
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = AR Expected: 134.3
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = NC Expected: 131.9
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = ND Expected: 131.87
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = NE Expected: 131.89
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = RI Expected: 132.0
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = AZ Expected: 133.25
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = NH Expected: 125.0
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = NJ Expected: 131.85
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = VT Expected: 131.18
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = NM Expected: 132.55
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = FL Expected: 131.79999
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = NV Expected: 132.98001
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = WA Expected: 133.92
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = NY Expected: 133.49
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = SC Expected: 132.22
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = SD Expected: 131.39
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = WI Expected: 130.42001
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = OH Expected: 132.14001
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = GA Expected: 132.0
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = OK Expected: 133.86
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = CA Expected: 133.25
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = WV Expected: 131.29
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = WY Expected: 130.4
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = OR Expected: 125.0
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = KS Expected: 133.62
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = CO Expected: 132.5
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = KY Expected: 131.0
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = CT Expected: 131.35
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = PA Expected: 131.34
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = LA Expected: 134.98
+RawTotal: 100.0 ShippingMethod: Next-Day Shipping DestinationState = TN Expected: 134.45999
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = DE Expected: 65.0
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = HI Expected: 66.74
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = TX Expected: 68.276
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = MA Expected: 67.5
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = MD Expected: 67.399994
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = IA Expected: 67.72
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = ME Expected: 67.2
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = ID Expected: 67.412
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = MI Expected: 67.399994
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = UT Expected: 67.704
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = MN Expected: 67.92
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = MO Expected: 68.156
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = IL Expected: 68.456
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = IN Expected: 67.8
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = MS Expected: 67.828
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = MT Expected: 65.0
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = AK Expected: 65.704
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = AL Expected: 68.604004
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = VA Expected: 67.252
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = AR Expected: 68.72
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = NC Expected: 67.76
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = ND Expected: 67.748
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = NE Expected: 67.756
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = RI Expected: 67.8
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = AZ Expected: 68.3
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = NH Expected: 65.0
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = NJ Expected: 67.740005
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = VT Expected: 67.472
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = NM Expected: 68.020004
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = FL Expected: 67.72
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = NV Expected: 68.192
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = WA Expected: 68.568
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = NY Expected: 68.395996
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = SC Expected: 67.888
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = SD Expected: 67.556
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = WI Expected: 67.168
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = OH Expected: 67.856
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = GA Expected: 67.8
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = OK Expected: 68.54401
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = CA Expected: 68.3
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = WV Expected: 67.516
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = WY Expected: 67.16
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = OR Expected: 65.0
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = KS Expected: 68.448
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = CO Expected: 68.0
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = KY Expected: 67.399994
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = CT Expected: 67.54
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = PA Expected: 67.536
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = LA Expected: 68.992004
+RawTotal: 40.0 ShippingMethod: Next-Day Shipping DestinationState = TN Expected: 68.784
+RawTotal: 3.4028235E38 ShippingMethod: Next-Day Shipping DestinationState = NC Expected: Infinity
+RawTotal: 0.01 ShippingMethod: Next-Day Shipping DestinationState = NC Expected: 25.01069
+------------- ---------------- ---------------
+
+Testcase: shippingCostCalcTest[0] took 0.003 sec
+Testcase: shippingCostCalcTest[1] took 0.002 sec
+Testcase: shippingCostCalcTest[2] took 0.001 sec
+Testcase: shippingCostCalcTest[3] took 0 sec
+Testcase: shippingCostCalcTest[4] took 0.001 sec
+Testcase: shippingCostCalcTest[5] took 0 sec
+Testcase: shippingCostCalcTest[6] took 0.001 sec
+Testcase: shippingCostCalcTest[7] took 0.001 sec
+Testcase: shippingCostCalcTest[8] took 0.001 sec
+Testcase: shippingCostCalcTest[9] took 0.001 sec
+Testcase: shippingCostCalcTest[10] took 0.001 sec
+Testcase: shippingCostCalcTest[11] took 0.001 sec
+Testcase: shippingCostCalcTest[12] took 0.001 sec
+Testcase: shippingCostCalcTest[13] took 0.001 sec
+Testcase: shippingCostCalcTest[14] took 0.001 sec
+Testcase: shippingCostCalcTest[15] took 0.001 sec
+Testcase: shippingCostCalcTest[16] took 0.001 sec
+Testcase: shippingCostCalcTest[17] took 0 sec
+Testcase: shippingCostCalcTest[18] took 0.001 sec
+Testcase: shippingCostCalcTest[19] took 0 sec
+Testcase: shippingCostCalcTest[20] took 0 sec
+Testcase: shippingCostCalcTest[21] took 0.001 sec
+Testcase: shippingCostCalcTest[22] took 0 sec
+Testcase: shippingCostCalcTest[23] took 0.001 sec
+Testcase: shippingCostCalcTest[24] took 0 sec
+Testcase: shippingCostCalcTest[25] took 0 sec
+Testcase: shippingCostCalcTest[26] took 0.001 sec
+Testcase: shippingCostCalcTest[27] took 0 sec
+Testcase: shippingCostCalcTest[28] took 0.001 sec
+Testcase: shippingCostCalcTest[29] took 0.001 sec
+Testcase: shippingCostCalcTest[30] took 0 sec
+Testcase: shippingCostCalcTest[31] took 0.001 sec
+Testcase: shippingCostCalcTest[32] took 0 sec
+Testcase: shippingCostCalcTest[33] took 0 sec
+Testcase: shippingCostCalcTest[34] took 0.001 sec
+Testcase: shippingCostCalcTest[35] took 0 sec
+Testcase: shippingCostCalcTest[36] took 0.001 sec
+Testcase: shippingCostCalcTest[37] took 0 sec
+Testcase: shippingCostCalcTest[38] took 0 sec
+Testcase: shippingCostCalcTest[39] took 0 sec
+Testcase: shippingCostCalcTest[40] took 0 sec
+Testcase: shippingCostCalcTest[41] took 0.001 sec
+Testcase: shippingCostCalcTest[42] took 0.001 sec
+Testcase: shippingCostCalcTest[43] took 0 sec
+Testcase: shippingCostCalcTest[44] took 0 sec
+Testcase: shippingCostCalcTest[45] took 0.001 sec
+Testcase: shippingCostCalcTest[46] took 0 sec
+Testcase: shippingCostCalcTest[47] took 0 sec
+Testcase: shippingCostCalcTest[48] took 0.001 sec
+Testcase: shippingCostCalcTest[49] took 0 sec
+Testcase: shippingCostCalcTest[50] took 0.001 sec
+Testcase: shippingCostCalcTest[51] took 0 sec
+Testcase: shippingCostCalcTest[52] took 0 sec
+Testcase: shippingCostCalcTest[53] took 0 sec
+Testcase: shippingCostCalcTest[54] took 0 sec
+Testcase: shippingCostCalcTest[55] took 0 sec
+Testcase: shippingCostCalcTest[56] took 0.001 sec
+Testcase: shippingCostCalcTest[57] took 0 sec
+Testcase: shippingCostCalcTest[58] took 0.001 sec
+Testcase: shippingCostCalcTest[59] took 0 sec
+Testcase: shippingCostCalcTest[60] took 0 sec
+Testcase: shippingCostCalcTest[61] took 0.001 sec
+Testcase: shippingCostCalcTest[62] took 0 sec
+Testcase: shippingCostCalcTest[63] took 0.001 sec
+Testcase: shippingCostCalcTest[64] took 0 sec
+Testcase: shippingCostCalcTest[65] took 0 sec
+Testcase: shippingCostCalcTest[66] took 0 sec
+Testcase: shippingCostCalcTest[67] took 0.001 sec
+Testcase: shippingCostCalcTest[68] took 0 sec
+Testcase: shippingCostCalcTest[69] took 0 sec
+Testcase: shippingCostCalcTest[70] took 0 sec
+Testcase: shippingCostCalcTest[71] took 0 sec
+Testcase: shippingCostCalcTest[72] took 0 sec
+Testcase: shippingCostCalcTest[73] took 0.001 sec
+Testcase: shippingCostCalcTest[74] took 0 sec
+Testcase: shippingCostCalcTest[75] took 0 sec
+Testcase: shippingCostCalcTest[76] took 0 sec
+Testcase: shippingCostCalcTest[77] took 0 sec
+Testcase: shippingCostCalcTest[78] took 0.001 sec
+Testcase: shippingCostCalcTest[79] took 0 sec
+Testcase: shippingCostCalcTest[80] took 0.001 sec
+Testcase: shippingCostCalcTest[81] took 0 sec
+Testcase: shippingCostCalcTest[82] took 0 sec
+Testcase: shippingCostCalcTest[83] took 0.001 sec
+Testcase: shippingCostCalcTest[84] took 0 sec
+Testcase: shippingCostCalcTest[85] took 0.001 sec
+Testcase: shippingCostCalcTest[86] took 0 sec
+Testcase: shippingCostCalcTest[87] took 0.001 sec
+Testcase: shippingCostCalcTest[88] took 0 sec
+Testcase: shippingCostCalcTest[89] took 0.001 sec
+Testcase: shippingCostCalcTest[90] took 0 sec
+Testcase: shippingCostCalcTest[91] took 0.001 sec
+Testcase: shippingCostCalcTest[92] took 0 sec
+Testcase: shippingCostCalcTest[93] took 0.001 sec
+Testcase: shippingCostCalcTest[94] took 0 sec
+Testcase: shippingCostCalcTest[95] took 0 sec
+Testcase: shippingCostCalcTest[96] took 0 sec
+Testcase: shippingCostCalcTest[97] took 0 sec
+Testcase: shippingCostCalcTest[98] took 0.001 sec
+Testcase: shippingCostCalcTest[99] took 0 sec
+Testcase: shippingCostCalcTest[100] took 0.001 sec
+Testcase: shippingCostCalcTest[101] took 0 sec
+Testcase: shippingCostCalcTest[102] took 0.001 sec
+Testcase: shippingCostCalcTest[103] took 0 sec
+Testcase: shippingCostCalcTest[104] took 0 sec
+Testcase: shippingCostCalcTest[105] took 0 sec
+Testcase: shippingCostCalcTest[106] took 0 sec
+Testcase: shippingCostCalcTest[107] took 0 sec
+Testcase: shippingCostCalcTest[108] took 0 sec
+Testcase: shippingCostCalcTest[109] took 0.001 sec
+Testcase: shippingCostCalcTest[110] took 0.001 sec
+Testcase: shippingCostCalcTest[111] took 0 sec
+Testcase: shippingCostCalcTest[112] took 0 sec
+Testcase: shippingCostCalcTest[113] took 0 sec
+Testcase: shippingCostCalcTest[114] took 0 sec
+Testcase: shippingCostCalcTest[115] took 0 sec
+Testcase: shippingCostCalcTest[116] took 0 sec
+Testcase: shippingCostCalcTest[117] took 0.001 sec
+Testcase: shippingCostCalcTest[118] took 0 sec
+Testcase: shippingCostCalcTest[119] took 0 sec
+Testcase: shippingCostCalcTest[120] took 0.004 sec
+Testcase: shippingCostCalcTest[121] took 0 sec
+Testcase: shippingCostCalcTest[122] took 0 sec
+Testcase: shippingCostCalcTest[123] took 0.001 sec
+Testcase: shippingCostCalcTest[124] took 0 sec
+Testcase: shippingCostCalcTest[125] took 0.001 sec
+Testcase: shippingCostCalcTest[126] took 0 sec
+Testcase: shippingCostCalcTest[127] took 0 sec
+Testcase: shippingCostCalcTest[128] took 0.001 sec
+Testcase: shippingCostCalcTest[129] took 0 sec
+Testcase: shippingCostCalcTest[130] took 0.001 sec
+Testcase: shippingCostCalcTest[131] took 0 sec
+Testcase: shippingCostCalcTest[132] took 0.001 sec
+Testcase: shippingCostCalcTest[133] took 0 sec
+Testcase: shippingCostCalcTest[134] took 0 sec
+Testcase: shippingCostCalcTest[135] took 0 sec
+Testcase: shippingCostCalcTest[136] took 0 sec
+Testcase: shippingCostCalcTest[137] took 0.001 sec
+Testcase: shippingCostCalcTest[138] took 0 sec
+Testcase: shippingCostCalcTest[139] took 0.001 sec
+Testcase: shippingCostCalcTest[140] took 0 sec
+Testcase: shippingCostCalcTest[141] took 0.001 sec
+Testcase: shippingCostCalcTest[142] took 0 sec
+Testcase: shippingCostCalcTest[143] took 0 sec
+Testcase: shippingCostCalcTest[144] took 0 sec
+Testcase: shippingCostCalcTest[145] took 0 sec
+Testcase: shippingCostCalcTest[146] took 0 sec
+Testcase: shippingCostCalcTest[147] took 0 sec
+Testcase: shippingCostCalcTest[148] took 0.001 sec
+Testcase: shippingCostCalcTest[149] took 0 sec
+Testcase: shippingCostCalcTest[150] took 0 sec
+Testcase: shippingCostCalcTest[151] took 0 sec
+Testcase: shippingCostCalcTest[152] took 0 sec
+Testcase: shippingCostCalcTest[153] took 0.001 sec
+Testcase: shippingCostCalcTest[154] took 0 sec
+Testcase: shippingCostCalcTest[155] took 0.001 sec
+Testcase: shippingCostCalcTest[156] took 0 sec
+Testcase: shippingCostCalcTest[157] took 0.001 sec
+Testcase: shippingCostCalcTest[158] took 0.002 sec
+Testcase: shippingCostCalcTest[159] took 0 sec
+Testcase: shippingCostCalcTest[160] took 0 sec
+Testcase: shippingCostCalcTest[161] took 0 sec
+Testcase: shippingCostCalcTest[162] took 0 sec
+Testcase: shippingCostCalcTest[163] took 0 sec
+Testcase: shippingCostCalcTest[164] took 0 sec
+Testcase: shippingCostCalcTest[165] took 0 sec
+Testcase: shippingCostCalcTest[166] took 0.001 sec
+Testcase: shippingCostCalcTest[167] took 0 sec
+Testcase: shippingCostCalcTest[168] took 0.002 sec
+Testcase: shippingCostCalcTest[169] took 0.001 sec
+Testcase: shippingCostCalcTest[170] took 0 sec
+Testcase: shippingCostCalcTest[171] took 0.001 sec
+Testcase: shippingCostCalcTest[172] took 0 sec
+Testcase: shippingCostCalcTest[173] took 0 sec
+Testcase: shippingCostCalcTest[174] took 0 sec
+Testcase: shippingCostCalcTest[175] took 0 sec
+Testcase: shippingCostCalcTest[176] took 0 sec
+Testcase: shippingCostCalcTest[177] took 0 sec
+Testcase: shippingCostCalcTest[178] took 0 sec
+Testcase: shippingCostCalcTest[179] took 0 sec
+Testcase: shippingCostCalcTest[180] took 0 sec
+Testcase: shippingCostCalcTest[181] took 0 sec
+Testcase: shippingCostCalcTest[182] took 0.001 sec
+Testcase: shippingCostCalcTest[183] took 0 sec
+Testcase: shippingCostCalcTest[184] took 0 sec
+Testcase: shippingCostCalcTest[185] took 0.001 sec
+Testcase: shippingCostCalcTest[186] took 0 sec
+Testcase: shippingCostCalcTest[187] took 0 sec
+Testcase: shippingCostCalcTest[188] took 0.001 sec
+Testcase: shippingCostCalcTest[189] took 0 sec
+Testcase: shippingCostCalcTest[190] took 0.001 sec
+Testcase: shippingCostCalcTest[191] took 0 sec
+Testcase: shippingCostCalcTest[192] took 0.001 sec
+Testcase: shippingCostCalcTest[193] took 0 sec
+Testcase: shippingCostCalcTest[194] took 0.001 sec
+Testcase: shippingCostCalcTest[195] took 0 sec
+Testcase: shippingCostCalcTest[196] took 0 sec
+Testcase: shippingCostCalcTest[197] took 0 sec
+Testcase: shippingCostCalcTest[198] took 0 sec
+Testcase: shippingCostCalcTest[199] took 0.001 sec
+Testcase: shippingCostCalcTest[200] took 0 sec
+Testcase: shippingCostCalcTest[201] took 0.001 sec
