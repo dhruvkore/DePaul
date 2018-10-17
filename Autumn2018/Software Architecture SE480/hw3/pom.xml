@@ -12,6 +12,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <maven.compiler.source>1.6</maven.compiler.source>
+      <maven.compiler.target>1.6</maven.compiler.target>
   </properties>
 
   <dependencies>
@@ -25,5 +27,16 @@
     	<artifactId>junit</artifactId>
     	<version>4.12</version>
     </dependency>
+      <dependency>
+          <groupId>com.netflix.hystrix</groupId>
+          <artifactId>hystrix-core</artifactId>
+          <version>1.2.12</version>
+      </dependency>
   </dependencies>
+    <repositories>
+        <repository>
+            <id>github.com</id>
+            <url>http://github.com/Netflix/Hystrix</url>
+        </repository>
+    </repositories>
 </project>

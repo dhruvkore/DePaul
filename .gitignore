@@ -2,3 +2,5 @@
 *.class
 *.o
 *.pyc
+*.dll
+*.jar

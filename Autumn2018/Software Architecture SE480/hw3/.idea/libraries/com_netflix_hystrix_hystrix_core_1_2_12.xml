@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="com.netflix.hystrix:hystrix-core:1.2.12" type="repository">
+    <properties maven-id="com.netflix.hystrix:hystrix-core:1.2.12" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/hystrix-core-1.2.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.7.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/archaius-core-0.4.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-configuration-1.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-lang-2.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jsr305-2.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

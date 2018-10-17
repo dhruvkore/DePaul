@@ -57,4 +57,20 @@ public class UserServiceTest {
 		
 		Assert.assertEquals(actual, expectedMovies);
 	}
+
+	@Test
+	public void NullPointerExceptionTest(){
+		UserService userService = Mockito.mock(UserService.class) ;
+		Mockito.when(userService.getAge()).thenThrow(NullPointerException.class);
+		MovieRecommendationService movieRecommendationService = new MovieRecommendationService(userService);
+
+		List<String> expectedMovies = new ArrayList<String>();
+		expectedMovies.add("Shrek");
+		expectedMovies.add("Coco");
+		expectedMovies.add("The Incredibles");
+
+		List<String> actual = movieRecommendationService.getRecommendedMovies();
+
+		Assert.assertEquals(actual, expectedMovies);
+	}
 }
