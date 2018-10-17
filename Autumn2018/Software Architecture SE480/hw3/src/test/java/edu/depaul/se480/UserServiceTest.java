@@ -7,6 +7,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 public class UserServiceTest {
 	
@@ -62,6 +64,52 @@ public class UserServiceTest {
 	public void NullPointerExceptionTest(){
 		UserService userService = Mockito.mock(UserService.class) ;
 		Mockito.when(userService.getAge()).thenThrow(NullPointerException.class);
+		MovieRecommendationService movieRecommendationService = new MovieRecommendationService(userService);
+
+		List<String> expectedMovies = new ArrayList<String>();
+		expectedMovies.add("Shrek");
+		expectedMovies.add("Coco");
+		expectedMovies.add("The Incredibles");
+
+		List<String> actual = movieRecommendationService.getRecommendedMovies();
+
+		Assert.assertEquals(actual, expectedMovies);
+	}
+
+	@Test
+	public void UserServiceTimeoutTest() throws InterruptedException {
+		UserService userService = Mockito.mock(UserService.class) ;
+		Mockito.when(userService.getAge()).thenAnswer(
+				new Answer<List<String>>() {
+					public List<String> answer(InvocationOnMock invocation) throws Throwable {
+						Thread.sleep(105); // Sleep 105
+						return new ArrayList<String>();
+					}
+				}
+		);
+		MovieRecommendationService movieRecommendationService = new MovieRecommendationService(userService);
+
+		List<String> expectedMovies = new ArrayList<String>();
+		expectedMovies.add("Shrek");
+		expectedMovies.add("Coco");
+		expectedMovies.add("The Incredibles");
+
+		List<String> actual = movieRecommendationService.getRecommendedMovies();
+
+		Assert.assertEquals(actual, expectedMovies);
+	}
+
+	@Test
+	public void UserServiceLongTimeoutTest() throws InterruptedException {
+		UserService userService = Mockito.mock(UserService.class) ;
+		Mockito.when(userService.getAge()).thenAnswer(
+				new Answer<List<String>>() {
+					public List<String> answer(InvocationOnMock invocation) throws Throwable {
+						Thread.sleep(5000); // Sleep 105
+						return new ArrayList<String>();
+					}
+				}
+		);
 		MovieRecommendationService movieRecommendationService = new MovieRecommendationService(userService);
 
 		List<String> expectedMovies = new ArrayList<String>();

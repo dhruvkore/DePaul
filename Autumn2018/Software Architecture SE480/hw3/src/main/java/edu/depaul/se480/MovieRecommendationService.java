@@ -2,6 +2,7 @@ package edu.depaul.se480;
 
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
+import com.netflix.hystrix.HystrixCommandProperties;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,14 @@ public class MovieRecommendationService extends HystrixCommand<List<String>> {
 	private IUserService userService;
 	
 	public MovieRecommendationService(IUserService us) {
-		super(HystrixCommandGroupKey.Factory.asKey("ExampleGroup"));
+		super(Setter.withGroupKey(
+				HystrixCommandGroupKey
+						.Factory
+						.asKey("MovieRecommendation")
+				)
+						.andCommandPropertiesDefaults(HystrixCommandProperties.Setter()
+								.withExecutionIsolationThreadTimeoutInMilliseconds(100)) //100ms timeout
+				);
 		userService = us;
 	}
 	
