@@ -11,9 +11,11 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 public class UserServiceTest {
-	
+
 	@Test
 	public void AdultTest(){
+		System.out.println("Running Adult Test...");
+
 		UserService userService = Mockito.mock(UserService.class) ;
 		Mockito.when(userService.getAge()).thenReturn(30);
 		MovieRecommendationService movieRecommendationService = new MovieRecommendationService(userService);
@@ -24,12 +26,14 @@ public class UserServiceTest {
 		expectedMovies.add("Saving Private Ryan");
 		
 		List<String> actual = movieRecommendationService.getRecommendedMovies();
-		
+
 		Assert.assertEquals(actual, expectedMovies);
 	}
 
 	@Test
 	public void KidsTest(){
+		System.out.println("Running Kids Test...");
+
 		UserService userService = Mockito.mock(UserService.class) ;
 		Mockito.when(userService.getAge()).thenReturn(2);
 		MovieRecommendationService movieRecommendationService = new MovieRecommendationService(userService);
@@ -46,6 +50,8 @@ public class UserServiceTest {
 	
 	@Test
 	public void TeensTest(){
+		System.out.println("Running Teens Test...");
+
 		UserService userService = Mockito.mock(UserService.class) ;
 		Mockito.when(userService.getAge()).thenReturn(15);
 		MovieRecommendationService movieRecommendationService = new MovieRecommendationService(userService);
@@ -62,6 +68,8 @@ public class UserServiceTest {
 
 	@Test
 	public void NullPointerExceptionTest(){
+		System.out.println("Running NullPointerException Test...");
+
 		UserService userService = Mockito.mock(UserService.class) ;
 		Mockito.when(userService.getAge()).thenThrow(NullPointerException.class);
 		MovieRecommendationService movieRecommendationService = new MovieRecommendationService(userService);
@@ -78,6 +86,8 @@ public class UserServiceTest {
 
 	@Test
 	public void UserServiceTimeoutTest() throws InterruptedException {
+		System.out.println("Running UserServiceTimeout Test...");
+
 		UserService userService = Mockito.mock(UserService.class) ;
 		Mockito.when(userService.getAge()).thenAnswer(
 				new Answer<List<String>>() {
@@ -101,6 +111,8 @@ public class UserServiceTest {
 
 	@Test
 	public void UserServiceLongTimeoutTest() throws InterruptedException {
+		System.out.println("Running Long UserServiceTimeout Test...");
+
 		UserService userService = Mockito.mock(UserService.class) ;
 		Mockito.when(userService.getAge()).thenAnswer(
 				new Answer<List<String>>() {
