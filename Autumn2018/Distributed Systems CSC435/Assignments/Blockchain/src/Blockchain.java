@@ -109,7 +109,7 @@ class BlockRecord implements Comparable{
     String SHA256String;
     String SignedSHA256;
     String BlockID;
-    String BlockIDSignedByProcess;
+    byte[] BlockIDSignedByProcess;
     String VerificationProcessID;
     String CreatingProcess;
     String PreviousHash;
@@ -177,11 +177,11 @@ class BlockRecord implements Comparable{
     @XmlElement
     public void setCreationDate(Date creationDate) { CreationDate = creationDate; }
 
-    public String getBlockIDSignedByProcess() {
+    public byte[] getBlockIDSignedByProcess() {
         return BlockIDSignedByProcess;
     }
     @XmlElement
-    public void setBlockIDSignedByProcess(String blockIDSignedByProcess) {
+    public void setBlockIDSignedByProcess(byte[] blockIDSignedByProcess) {
         BlockIDSignedByProcess = blockIDSignedByProcess;
     }
 
@@ -251,6 +251,8 @@ class UnverifiedBlockServer implements Runnable {
             try{
                 BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
                 String data = in.readLine ();
+
+                System.out.println("Received unverified block: " + data);
 
                 JAXBContext jaxbContext = JAXBContext.newInstance(BlockRecord.class);
                 Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -428,6 +430,21 @@ public class Blockchain {
     public static KeyPair keyPair;
     public static PublicKey[] nodePublicKeys = new PublicKey[20];
 
+    public static byte[] signData(byte[] data, PrivateKey key) throws Exception {
+        Signature signer = Signature.getInstance("SHA1withRSA");
+        signer.initSign(key);
+        signer.update(data);
+        return (signer.sign());
+    }
+
+    public static boolean verifySig(byte[] data, PublicKey key, byte[] sig) throws Exception {
+        Signature signer = Signature.getInstance("SHA1withRSA");
+        signer.initVerify(key);
+        signer.update(data);
+
+        return (signer.verify(sig));
+    }
+
     public static KeyPair generateKeyPair(long seed) throws Exception {
         KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance("RSA");
         SecureRandom rng = SecureRandom.getInstance("SHA1PRNG", "SUN");
@@ -498,6 +515,10 @@ public class Blockchain {
                         idA = UUID.randomUUID();
                         suuid = new String(UUID.randomUUID().toString());
                         blockArray[n].setABlockID(suuid);
+
+                        byte[] signedUUID = signData(suuid.getBytes(), Blockchain.keyPair.getPrivate());
+                        blockArray[n].setBlockIDSignedByProcess(signedUUID);
+
                         blockArray[n].setACreatingProcess("Process" + Integer.toString(PID));
                         blockArray[n].setAVerificationProcessID("To be set later...");
                         /* CDE put the file data into the block record: */
