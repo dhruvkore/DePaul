@@ -372,7 +372,21 @@ class BlockchainServer implements Runnable {
 // Class Blockchain for Blockchain
 public class Blockchain {
     public static String serverName = "localhost";
-    public static String blockchain = "[First block]"; //Holds full Block Chain
+    public static String blockchain =   "\"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\" standalone=\\\"yes\\\"?>\"" +
+                                        "<BlockLedger>" +
+                                            "<blockRecord>" +
+                                                "<ABlockID>1b97a338-2603-4f9c-86aa-ebdb400759a4</ABlockID>" +
+                                                "<ACreatingProcess>Process0</ACreatingProcess>" +
+                                                "<ASHA256String>SHA string goes here...</ASHA256String>" +
+                                                "<ASignedSHA256>Signed SHA string goes here...</ASignedSHA256>" +
+                                                "<AVerificationProcessID>To be set later...</AVerificationProcessID>" +
+                                                "<creationDate>2018-10-20T21:39:46.953-05:00</creationDate>" +
+                                                "<FDOB>1996.03.07</FDOB><FFname>Fake</FFname>" +
+                                                "<FLname>Block</FLname>" +
+                                                "<FSSNum>123-45-6789</FSSNum><GDiag>Fake</GDiag>" +
+                                                "<GRx>Stuff</GRx><GTreat>Other</GTreat>" +
+                                                "</blockRecord>" +
+                                                "</BlockLedger>"; //Fake first Block
     public static int numProcesses = 3; // Set this to match your batch execution file that starts N processes with args 0,1,2,...N
     public static int PID = 0; // Our process ID
 
@@ -486,8 +500,25 @@ public class Blockchain {
 
         new Thread(new PublicKeyServer()).start(); // New thread to process incoming public keys
         new Thread(new UnverifiedBlockServer(queue)).start(); // New thread to process incoming unverified blocks
-        new Thread(new BlockchainServer()).start(); // New thread to process incomming new Blockchains
+        new Thread(new BlockchainServer()).start(); // New thread to process incoming new Blockchains
         try{Thread.sleep(3000);}catch(Exception e){} // Wait for servers to start.
+        if(PID == 0){
+            try {
+                Socket sock;
+                PrintStream toServer;
+
+                for (int i = 0; i < Blockchain.numProcesses; i++) { // send to each process in group, including us:
+                    sock = new Socket(Blockchain.serverName, Ports.BlockchainServerPortBase + (i * 1000));
+                    toServer = new PrintStream(sock.getOutputStream());
+                    toServer.println(blockchain);
+                    toServer.flush(); // make the multicast
+                    sock.close();
+                }
+            }
+            catch (IOException e){
+                e.printStackTrace();
+            }
+        }
         new Blockchain().MultiSend(); // Multicast some new unverified blocks out to all servers as data
         try{Thread.sleep(3000);}catch(Exception e){} // Wait for multicast to fill incoming queue for our example.
 
