@@ -100,7 +100,7 @@ class BlockLedger
 }
 
 @XmlRootElement
-class BlockRecord{
+class BlockRecord implements Comparable{
     /* Examples of block fields: */
     String SHA256String;
     String SignedSHA256;
@@ -115,6 +115,7 @@ class BlockRecord{
     String Diag;
     String Treat;
     String Rx;
+    Date CreationDate;
 
   /* Examples of accessors for the BlockRecord fields. Note that the XML tools sort the fields alphabetically
      by name of accessors, so A=header, F=Indentification, G=Medical: */
@@ -167,6 +168,14 @@ class BlockRecord{
     @XmlElement
     public void setGRx(String D){this.Rx = D;}
 
+    public Date getCreationDate() { return CreationDate; }
+    @XmlElement
+    public void setCreationDate(Date creationDate) { CreationDate = creationDate; }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.getCreationDate().compareTo(((BlockRecord)o).getCreationDate());
+    }
 }
 
 class PublicKeyWorker extends Thread { // Class definition
@@ -200,8 +209,8 @@ class PublicKeyServer implements Runnable {
 }
 
 class UnverifiedBlockServer implements Runnable {
-    BlockingQueue<String> queue;
-    UnverifiedBlockServer(BlockingQueue<String> queue){
+    BlockingQueue<BlockRecord> queue;
+    UnverifiedBlockServer(BlockingQueue<BlockRecord> queue){
         this.queue = queue; // Constructor binds our prioirty queue to the local variable.
     }
 
@@ -217,10 +226,13 @@ class UnverifiedBlockServer implements Runnable {
                 BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
                 String data = in.readLine ();
 
+                JAXBContext jaxbContext = JAXBContext.newInstance(BlockRecord.class);
+                Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
+                BlockRecord br = (BlockRecord) jaxbUnmarshaller.unmarshal(new StringReader(data));
 
                 System.out.println("Put in priority queue: " + data + "\n");
-                queue.put(data);
+                queue.put(br);
                 sock.close();
             } catch (Exception x){x.printStackTrace();}
         }
@@ -247,14 +259,14 @@ is just an example of how to implement such a queue. It must be concurrent safe 
 "at once," (mutiple worker threads to add to the queue, and consumer thread to remove from it).*/
 
 class UnverifiedBlockConsumer implements Runnable {
-    BlockingQueue<String> queue;
+    BlockingQueue<BlockRecord> queue;
     int PID;
-    UnverifiedBlockConsumer(BlockingQueue<String> queue){
+    UnverifiedBlockConsumer(BlockingQueue<BlockRecord> queue){
         this.queue = queue; // Constructor binds our prioirty queue to the local variable.
     }
 
     public void run(){
-        String data;
+        BlockRecord br;
         PrintStream toServer;
         Socket sock;
         String newBlockchain;
@@ -263,15 +275,9 @@ class UnverifiedBlockConsumer implements Runnable {
         System.out.println("Starting the Unverified Block Priority Queue Consumer thread.\n");
         try{
             while(true){ // Consume from the incoming queue. Do the work to verify. Mulitcast new Blockchain
-                data = queue.take(); // Will blocked-wait on empty queue
-                System.out.println("Consumer got unverified: " + data.toString());
+                br = queue.take(); // Will blocked-wait on empty queue
+                System.out.println("Consumer got unverified: " + br.toString());
 
-                JAXBContext jaxbContext = JAXBContext.newInstance(BlockRecord.class);
-                Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-                System.out.println(data);
-                StringReader sw = new StringReader(data);
-
-                BlockRecord br = (BlockRecord) jaxbUnmarshaller.unmarshal(sw);
 
 
                 // Ordindarily we would do real work here, based on the incoming data.
@@ -286,7 +292,14 @@ class UnverifiedBlockConsumer implements Runnable {
            the lowest verification timestamp. For the example we use a crude filter, which also may let some dups through */
                 if(Blockchain.blockchain.indexOf(br.BlockID) < 0){ // Crude, but excludes most duplicates.
                     System.out.println("Block [" + br.BlockID + "] verified by P" + Blockchain.PID);
-                    String fullBlock = data;
+
+                    JAXBContext jaxbContext = JAXBContext.newInstance(BlockRecord.class);
+                    Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+                    StringWriter sw = new StringWriter();
+                    jaxbMarshaller.marshal(br, sw);
+
+                    String fullBlock = sw.toString();
                     String XMLHeader = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
                     String blockHeader = "<BlockLedger>";
                     String blockTail = "</BlockLedger>";
@@ -370,6 +383,7 @@ public class Blockchain {
     private static final int iDIAG = 4;
     private static final int iTREAT = 5;
     private static final int iRX = 6;
+    private static final int iDATE = 7;
     public static String FILENAME = "";
 
     public void MultiSend (){ // Multicast some data to each of the processes.
@@ -424,6 +438,7 @@ public class Blockchain {
                         blockArray[n].setGDiag(tokens[iDIAG]);
                         blockArray[n].setGTreat(tokens[iTREAT]);
                         blockArray[n].setGRx(tokens[iRX]);
+                        blockArray[n].setCreationDate(new Date());
                         n++;
                     }
                     System.out.println(n + " records read.");
@@ -466,7 +481,7 @@ public class Blockchain {
 
         System.out.println("Using input file: " + FILENAME);
 
-        final BlockingQueue<String> queue = new PriorityBlockingQueue<>(); // Concurrent queue for unverified blocks
+        final BlockingQueue<BlockRecord> queue = new PriorityBlockingQueue<>(); // Concurrent queue for unverified blocks
         new Ports().setPorts(); // Establish OUR port number scheme, based on PID
 
         new Thread(new PublicKeyServer()).start(); // New thread to process incoming public keys
