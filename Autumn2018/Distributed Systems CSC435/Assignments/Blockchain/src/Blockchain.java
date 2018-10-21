@@ -29,11 +29,15 @@ Verfy the signature with public key that has been restored.
 
 import sun.jvm.hotspot.opto.Block;
 
+import java.security.*;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.*;
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.*;
 
+import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -105,6 +109,7 @@ class BlockRecord implements Comparable{
     String SHA256String;
     String SignedSHA256;
     String BlockID;
+    String BlockIDSignedByProcess;
     String VerificationProcessID;
     String CreatingProcess;
     String PreviousHash;
@@ -172,6 +177,22 @@ class BlockRecord implements Comparable{
     @XmlElement
     public void setCreationDate(Date creationDate) { CreationDate = creationDate; }
 
+    public String getBlockIDSignedByProcess() {
+        return BlockIDSignedByProcess;
+    }
+    @XmlElement
+    public void setBlockIDSignedByProcess(String blockIDSignedByProcess) {
+        BlockIDSignedByProcess = blockIDSignedByProcess;
+    }
+
+    public String getPreviousHash() {
+        return PreviousHash;
+    }
+    @XmlElement
+    public void setPreviousHash(String previousHash) {
+        PreviousHash = previousHash;
+    }
+
     @Override
     public int compareTo(Object o) {
         return this.getCreationDate().compareTo(((BlockRecord)o).getCreationDate());
@@ -185,7 +206,12 @@ class PublicKeyWorker extends Thread { // Class definition
         try{
             BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
             String data = in.readLine ();
-            System.out.println("Got key: " + data);
+            int pid = Integer.parseInt(data.substring(0, data.indexOf(" ")));
+            String publicKeyStr = data.substring(2, data.length());
+            System.out.println("Got key: " + publicKeyStr + " From PID: " + pid);
+
+            Blockchain.nodePublicKeys[pid] = Blockchain.strToPublicKey(publicKeyStr);
+
             sock.close();
         } catch (IOException x){x.printStackTrace();}
     }
@@ -399,17 +425,48 @@ public class Blockchain {
     private static final int iRX = 6;
     private static final int iDATE = 7;
     public static String FILENAME = "";
+    public static KeyPair keyPair;
+    public static PublicKey[] nodePublicKeys = new PublicKey[20];
+
+    public static KeyPair generateKeyPair(long seed) throws Exception {
+        KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance("RSA");
+        SecureRandom rng = SecureRandom.getInstance("SHA1PRNG", "SUN");
+        rng.setSeed(seed);
+        keyGenerator.initialize(1024, rng);
+
+        return (keyGenerator.generateKeyPair());
+    }
+
+    public static PublicKey strToPublicKey(String publicKeyStr) {
+        byte[] publicByte = Base64.getDecoder().decode(publicKeyStr);
+        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicByte);
+        try {
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            PublicKey publicKey = keyFactory.generatePublic(keySpec);
+            return publicKey;
+        }
+        catch(NoSuchAlgorithmException nsae){
+            nsae.printStackTrace();
+        }
+        catch (InvalidKeySpecException ikse){
+            ikse.printStackTrace();
+        }
+        return null;
+    }
 
     public void MultiSend (){ // Multicast some data to each of the processes.
         Socket sock;
         PrintStream toServer;
 
         try{
-            for(int i=0; i< numProcesses; i++){// Send our key to all servers.
+            Blockchain.keyPair = generateKeyPair(999);
+
+            for(int i=0; i< numProcesses; i++){
                 sock = new Socket(serverName, Ports.KeyServerPortBase + (i * 1000));
                 toServer = new PrintStream(sock.getOutputStream());
-                toServer.println("FakeKeyProcess" + Blockchain.PID); toServer.flush();
-                sock.close();
+                String publicKey = Base64.getEncoder().encodeToString(Blockchain.keyPair.getPublic().getEncoded());
+                toServer.println(PID + " " + publicKey);
+                System.out.println("Sent Key: " + publicKey);
             }
             Thread.sleep(1000); // wait for keys to settle, normally would wait for an ack
 
