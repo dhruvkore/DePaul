@@ -111,7 +111,7 @@ class BlockRecord implements Comparable{
     String BlockID;
     byte[] BlockIDSignedByProcess;
     String VerificationProcessID;
-    String CreatingProcess;
+    int CreatingProcess;
     String PreviousHash;
     String Fname;
     String Lname;
@@ -133,9 +133,9 @@ class BlockRecord implements Comparable{
     @XmlElement
     public void setASignedSHA256(String SH){this.SignedSHA256 = SH;}
 
-    public String getACreatingProcess() {return CreatingProcess;}
+    public int getACreatingProcess() {return CreatingProcess;}
     @XmlElement
-    public void setACreatingProcess(String CP){this.CreatingProcess = CP;}
+    public void setACreatingProcess(int CP){this.CreatingProcess = CP;}
 
     public String getAVerificationProcessID() {return VerificationProcessID;}
     @XmlElement
@@ -306,7 +306,15 @@ class UnverifiedBlockConsumer implements Runnable {
                 br = queue.take(); // Will blocked-wait on empty queue
                 System.out.println("Consumer got unverified: " + br.toString());
 
+                if(Blockchain.blockchain.contains(br.BlockID)){ //If block is already in the chain, then disregard.
+                    return;
+                }
 
+                if(!Blockchain.verifySig(br.getABlockID().getBytes(),
+                        Blockchain.nodePublicKeys[br.getACreatingProcess()],
+                        br.getBlockIDSignedByProcess())){
+                    System.out.println("Cannot Verify Block: " + br.getABlockID() + "  :(");
+                }
 
                 // Ordindarily we would do real work here, based on the incoming data.
                 int j; // Here we fake doing some work (That is, here we could cheat, so not ACTUAL work...)
@@ -519,7 +527,7 @@ public class Blockchain {
                         byte[] signedUUID = signData(suuid.getBytes(), Blockchain.keyPair.getPrivate());
                         blockArray[n].setBlockIDSignedByProcess(signedUUID);
 
-                        blockArray[n].setACreatingProcess("Process" + Integer.toString(PID));
+                        blockArray[n].setACreatingProcess(PID);
                         blockArray[n].setAVerificationProcessID("To be set later...");
                         /* CDE put the file data into the block record: */
                         tokens = InputLineStr.split(" +"); // Tokenize the input
