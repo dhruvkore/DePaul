@@ -1,12 +1,13 @@
 package edu.depaul.Filters;
 
 import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
 
 public class FilterNonalphabeticWords extends BaseFilter {
     private volatile boolean running = true;
     public int i = 0;
 
-    public FilterNonalphabeticWords(Queue<String> FromQueue, Queue<String> ToQueue) {
+    public FilterNonalphabeticWords(BlockingQueue<String> FromQueue, BlockingQueue<String> ToQueue) {
         super(FromQueue, ToQueue);
     }
 

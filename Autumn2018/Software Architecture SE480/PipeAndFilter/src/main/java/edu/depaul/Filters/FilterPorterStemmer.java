@@ -3,6 +3,7 @@ package edu.depaul.Filters;
 import opennlp.tools.stemmer.PorterStemmer;
 
 import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
 
 //Uses PorterFilter Library from OpenNPL library
 public class FilterPorterStemmer extends BaseFilter {
@@ -10,7 +11,7 @@ public class FilterPorterStemmer extends BaseFilter {
     private PorterStemmer porterStemmer;
     public int i = 0;
 
-    public FilterPorterStemmer(Queue<String> FromQueue, Queue<String> ToQueue) {
+    public FilterPorterStemmer(BlockingQueue<String> FromQueue, BlockingQueue<String> ToQueue) {
         super(FromQueue, ToQueue);
         porterStemmer = new PorterStemmer();
     }

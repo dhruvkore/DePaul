@@ -9,6 +9,9 @@ import java.io.FileReader;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,10 +31,10 @@ public class FilterBook_PipeAndFilter {
             ex.printStackTrace();
         }
 
-        Queue<String> startMQ = new LinkedList<String>();
-        Queue<String> stopwordsToNonAlphabetMQ = new LinkedList<String>();
-        Queue<String> nonAlphbetToStemMQ = new LinkedList<String>();
-        Queue<String> StemToWordCountMQ = new LinkedList<String>();
+        BlockingQueue<String> startMQ = new LinkedBlockingQueue<String>();
+        BlockingQueue<String> stopwordsToNonAlphabetMQ = new LinkedBlockingQueue<String>();
+        BlockingQueue<String> nonAlphbetToStemMQ = new LinkedBlockingQueue<String>();
+        BlockingQueue<String> StemToWordCountMQ = new LinkedBlockingQueue<String>();
 
         BaseFilter stopWordsFilter = new FilterStopWords(startMQ, stopwordsToNonAlphabetMQ, stopWords);
         BaseFilter nonAlphabetFilter = new FilterNonalphabeticWords(stopwordsToNonAlphabetMQ, nonAlphbetToStemMQ);
@@ -75,18 +78,18 @@ public class FilterBook_PipeAndFilter {
         //Wait for queues to be empty after book has been read
         try {
             while (startMQ.peek() != null) {
-                Thread.sleep(1000);
+                //Thread.sleep(1000);
             }
             while (stopwordsToNonAlphabetMQ.peek() != null) {
-                Thread.sleep(1000);
+                //Thread.sleep(1000);
             }
             while (nonAlphbetToStemMQ.peek()  != null) {
-                Thread.sleep(1000);
+                //Thread.sleep(1000);
             }
             while (StemToWordCountMQ.peek()  != null) {
-                Thread.sleep(1000);
+                //Thread.sleep(1000);
             }
-            Thread.sleep(5000);
+            //Thread.sleep(5000);
         }
         catch (Exception ex){
             ex.printStackTrace();

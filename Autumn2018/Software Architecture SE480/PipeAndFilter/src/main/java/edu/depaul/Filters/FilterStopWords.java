@@ -6,13 +6,14 @@ import sun.jvm.hotspot.utilities.MessageQueue;
 import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
+import java.util.concurrent.BlockingQueue;
 
 public class FilterStopWords extends BaseFilter {
     private Set<String> stopWords;
     private volatile boolean running = true;
     public int i = 0;
 
-    public FilterStopWords(Queue<String>  FromQueue, Queue<String> ToQueue, Set<String> StopWords) {
+    public FilterStopWords(BlockingQueue<String>  FromQueue, BlockingQueue<String> ToQueue, Set<String> StopWords) {
         super(FromQueue, ToQueue);
         if(StopWords != null) {
             this.stopWords = StopWords;

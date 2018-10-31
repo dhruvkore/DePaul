@@ -2,13 +2,14 @@ package edu.depaul.Filters;
 
 
 import java.util.*;
+import java.util.concurrent.BlockingQueue;
 
 // Maintains count of each word; Doesn't really filter anything
 public class FilterFrequencyCount extends BaseFilter {
     private HashMap<String, Integer> wordCounts;
     public int i = 0;
 
-    public FilterFrequencyCount(Queue<String> FromQueue, Queue<String> ToQueue) {
+    public FilterFrequencyCount(BlockingQueue<String> FromQueue, BlockingQueue<String> ToQueue) {
         super(FromQueue, ToQueue);
         wordCounts = new HashMap<String, Integer>();
     }
