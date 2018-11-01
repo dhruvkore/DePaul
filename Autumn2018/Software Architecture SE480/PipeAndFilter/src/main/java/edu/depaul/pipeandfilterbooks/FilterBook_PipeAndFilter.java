@@ -17,7 +17,9 @@ import java.util.regex.Pattern;
 
 public class FilterBook_PipeAndFilter {
     public static void main(String[] args) {
-        File bookFile = new File("alice30.txt");
+        String inputfile = args[0];
+
+        File bookFile = new File(inputfile);
         File stopWordsFile = new File("stopwords.txt");
         HashSet<String> stopWords = new HashSet<String>();
         try {

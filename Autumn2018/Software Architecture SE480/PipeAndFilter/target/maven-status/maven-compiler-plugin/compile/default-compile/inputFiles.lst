@@ -1,1 +1,7 @@
-/Users/dhruvkore/Dev/GitHub/DePaul/Autumn2018/Software Architecture SE480/PipeAndFilter/src/main/java/FilterBook_PipeAndFilter.java
+/Users/dhruvkore/Dev/GitHub/DePaul/Autumn2018/Software Architecture SE480/PipeAndFilter/src/main/java/edu/depaul/Filters/FilterFrequencyCount.java
+/Users/dhruvkore/Dev/GitHub/DePaul/Autumn2018/Software Architecture SE480/PipeAndFilter/src/main/java/edu/depaul/Filters/FilterNonalphabeticWords.java
+/Users/dhruvkore/Dev/GitHub/DePaul/Autumn2018/Software Architecture SE480/PipeAndFilter/src/main/java/edu/depaul/Filters/FilterStopWords.java
+/Users/dhruvkore/Dev/GitHub/DePaul/Autumn2018/Software Architecture SE480/PipeAndFilter/src/main/java/edu/depaul/Filters/IFilter.java
+/Users/dhruvkore/Dev/GitHub/DePaul/Autumn2018/Software Architecture SE480/PipeAndFilter/src/main/java/edu/depaul/pipeandfilterbooks/FilterBook_PipeAndFilter.java
+/Users/dhruvkore/Dev/GitHub/DePaul/Autumn2018/Software Architecture SE480/PipeAndFilter/src/main/java/edu/depaul/Filters/FilterPorterStemmer.java
+/Users/dhruvkore/Dev/GitHub/DePaul/Autumn2018/Software Architecture SE480/PipeAndFilter/src/main/java/edu/depaul/Filters/BaseFilter.java
