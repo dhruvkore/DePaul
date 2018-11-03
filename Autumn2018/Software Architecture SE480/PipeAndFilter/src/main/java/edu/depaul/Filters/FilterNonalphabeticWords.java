@@ -1,11 +1,8 @@
 package edu.depaul.Filters;
 
-import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 
 public class FilterNonalphabeticWords extends BaseFilter {
-    private volatile boolean running = true;
-    public int i = 0;
 
     public FilterNonalphabeticWords(BlockingQueue<String> FromQueue, BlockingQueue<String> ToQueue) {
         super(FromQueue, ToQueue);
@@ -21,8 +18,7 @@ public class FilterNonalphabeticWords extends BaseFilter {
             return input;
         }
 
-        increment();
-
+        // Removes words that have letters that are not alphabetic
         for(int i = 0; i < input.length() - 2; i ++){
             if(Character.toLowerCase(input.charAt(i)) > Character.toLowerCase(input.charAt(i))){
                 return "";

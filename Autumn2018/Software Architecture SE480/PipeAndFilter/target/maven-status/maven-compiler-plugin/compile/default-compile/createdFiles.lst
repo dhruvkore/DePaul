@@ -1,0 +1,9 @@
+edu/depaul/Filters/FilterPorterStemmer.class
+edu/depaul/Filters/FilterStopWords.class
+edu/depaul/Filters/BaseFilter.class
+edu/depaul/Filters/FilterFrequencyCount$2.class
+edu/depaul/Filters/IFilter.class
+edu/depaul/pipeandfilterbooks/FilterBook_PipeAndFilter.class
+edu/depaul/Filters/FilterNonalphabeticWords.class
+edu/depaul/Filters/FilterFrequencyCount.class
+edu/depaul/Filters/FilterFrequencyCount$1.class

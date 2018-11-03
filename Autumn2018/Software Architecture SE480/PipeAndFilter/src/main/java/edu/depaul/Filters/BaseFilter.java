@@ -9,7 +9,6 @@ import java.util.concurrent.BlockingQueue;
 public class BaseFilter implements IFilter, Runnable{
     protected BlockingQueue<String> fromQueue;
     protected BlockingQueue<String>  toQueue;
-    private int i = 0;
 
     private volatile boolean running = true;
 
@@ -28,17 +27,8 @@ public class BaseFilter implements IFilter, Runnable{
                 String output = filter(fromQueue.poll());
 
                 // If there is no to Queue
-                if (toQueue != null && (output != null && !output.isEmpty())) {
+                if (toQueue != null && (output != null && !output.isEmpty()))
                     toQueue.add(output);
-                } else {
-
-//                    /*try {
-//                        System.out.println("Sleeping: " + i);
-//                        Thread.sleep(5);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }*/
-                }
             }
         }
     }
@@ -49,14 +39,6 @@ public class BaseFilter implements IFilter, Runnable{
     }
 
     public void print(){
-        System.out.println("Base Filter :D");
-    }
-
-    public void increment(){
-        i = i + 1;
-    }
-
-    public void printI(){
-        System.out.println(i);
+        System.out.println("Base Filter Print :D This Filter has not defined a print.");
     }
 }

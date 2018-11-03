@@ -107,10 +107,6 @@ public class FilterBook_PipeAndFilter {
 
         //Print Word Counts
         wordCountFilter.print();
-        stopWordsFilter.printI();
-        nonAlphabetFilter.printI();
-        porterStemmerFilter.printI();
-        wordCountFilter.printI();
 
         System.out.println("Total Words: " + w);
     }

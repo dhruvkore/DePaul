@@ -2,14 +2,11 @@ package edu.depaul.Filters;
 
 import opennlp.tools.stemmer.PorterStemmer;
 
-import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 
 //Uses PorterFilter Library from OpenNPL library
 public class FilterPorterStemmer extends BaseFilter {
-    private volatile boolean running = true;
     private PorterStemmer porterStemmer;
-    public int i = 0;
 
     public FilterPorterStemmer(BlockingQueue<String> FromQueue, BlockingQueue<String> ToQueue) {
         super(FromQueue, ToQueue);
@@ -22,8 +19,7 @@ public class FilterPorterStemmer extends BaseFilter {
             return null;
         }
 
-        increment();
-
+        //Uses OpenNPL opensourced library for stemming; jumping -> jump, watery -> water
         return porterStemmer.stem(input);
     }
 }

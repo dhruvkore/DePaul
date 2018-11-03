@@ -7,7 +7,6 @@ import java.util.concurrent.BlockingQueue;
 // Maintains count of each word; Doesn't really filter anything
 public class FilterFrequencyCount extends BaseFilter {
     private HashMap<String, Integer> wordCounts;
-    public int i = 0;
 
     public FilterFrequencyCount(BlockingQueue<String> FromQueue, BlockingQueue<String> ToQueue) {
         super(FromQueue, ToQueue);
@@ -19,8 +18,6 @@ public class FilterFrequencyCount extends BaseFilter {
         if(input == null){
             return null;
         }
-
-        increment();
 
         if(wordCounts.containsKey(input)){
             wordCounts.put(input, wordCounts.get(input) + 1);
@@ -43,7 +40,7 @@ public class FilterFrequencyCount extends BaseFilter {
             }
         });
 
-        // Sorts by most frequent word; Decending order
+        // Sorts by most frequent word; Descending order
         Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
             @Override
             public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
@@ -56,6 +53,6 @@ public class FilterFrequencyCount extends BaseFilter {
             Map.Entry<String, Integer> wordToCount = list.get(i);
             System.out.println(wordToCount.getKey() + " | " + wordToCount.getValue());
         }
-        System.out.println("Number of words: " + list.size());
+        System.out.println("Total Number of Distinct Words After Filters applied: " + list.size());
     }
 }
