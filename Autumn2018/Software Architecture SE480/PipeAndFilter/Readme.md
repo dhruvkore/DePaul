@@ -8,7 +8,7 @@
 
 <p>Please install maven and run</p>
 <p></p>
-<p>"mvn package"</p>
+<h1>"mvn package"</h1>
 <p></p>
 <p>This will download all dependencies and compile the application.</p>
 <p>It will also run all 3 test cases of files: </p>
