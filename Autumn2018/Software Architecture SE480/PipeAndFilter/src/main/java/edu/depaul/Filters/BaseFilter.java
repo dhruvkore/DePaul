@@ -1,20 +1,22 @@
 package edu.depaul.Filters;
 
-import sun.jvm.hotspot.utilities.MessageQueue;
-import sun.plugin2.message.Message;
-
-import java.util.Queue;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
 public class BaseFilter implements IFilter, Runnable{
     protected BlockingQueue<String> fromQueue;
     protected BlockingQueue<String>  toQueue;
 
+    protected List<Long> processMessageTimes;
+
     private volatile boolean running = true;
 
     public BaseFilter(BlockingQueue<String>  FromQueue, BlockingQueue<String> ToQueue){
         this.fromQueue = FromQueue;
         this.toQueue = ToQueue;
+        processMessageTimes = new ArrayList<Long>();
     }
 
     public String filter(String input) {
@@ -22,13 +24,25 @@ public class BaseFilter implements IFilter, Runnable{
     }
 
     public void run() {
+        Long startTime = new Long(0);
+        Long stopTime = new Long(0);
+
         while(running){
             if(!fromQueue.isEmpty()) {
-                String output = filter(fromQueue.poll());
+                // Get from Queue
+                startTime = System.currentTimeMillis();
+                String incoming = fromQueue.poll();
+
+                //Filter
+                String output = filter(incoming);
 
                 // If there is no to Queue
-                if (toQueue != null && (output != null && !output.isEmpty()))
+                if (toQueue != null && (output != null && !output.isEmpty())) {
+                    // Output to new Queue (if applicable)
                     toQueue.add(output);
+                    stopTime = System.currentTimeMillis();
+                    processMessageTimes.add(stopTime - startTime);
+                }
             }
         }
     }
@@ -40,5 +54,23 @@ public class BaseFilter implements IFilter, Runnable{
 
     public void print(){
         System.out.println("Base Filter Print :D This Filter has not defined a print.");
+    }
+
+    public float getAverageProcessTime(){
+        return calcAverage(processMessageTimes);
+    }
+
+    private float calcAverage(List<Long> allTimes){
+        Long sum = new Long(0);
+
+        if(!allTimes.isEmpty()){
+            for(Long l : allTimes){
+                sum = sum + l;
+            }
+
+            return (float)sum / allTimes.size();
+        }
+
+        return sum;
     }
 }

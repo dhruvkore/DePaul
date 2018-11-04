@@ -1,6 +1,7 @@
 package edu.depaul.Filters;
 
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.*;
 import java.util.concurrent.BlockingQueue;
 
@@ -19,12 +20,17 @@ public class FilterFrequencyCount extends BaseFilter {
             return null;
         }
 
+        Long startTime = System.currentTimeMillis();
         if(wordCounts.containsKey(input)){
             wordCounts.put(input, wordCounts.get(input) + 1);
         }
         else{
             wordCounts.put(input, 1);
         }
+
+        Long stopTime = System.currentTimeMillis();
+        //Word Count Filter Object works differently so needs to be timed differently
+        processMessageTimes.add(stopTime - startTime);
         return null;
     }
 
@@ -48,6 +54,7 @@ public class FilterFrequencyCount extends BaseFilter {
             }
         });
 
+        System.out.println();
         System.out.println("Word | Count");
         for(int i = 0; i < 10; i++){
             Map.Entry<String, Integer> wordToCount = list.get(i);
