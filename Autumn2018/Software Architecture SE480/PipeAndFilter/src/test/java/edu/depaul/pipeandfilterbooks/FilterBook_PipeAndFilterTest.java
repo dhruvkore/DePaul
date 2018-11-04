@@ -48,6 +48,8 @@ public class FilterBook_PipeAndFilterTest {
         Thread t3 = new Thread(porterStemmerFilter);
         Thread t4 = new Thread(wordCountFilter);
 
+        Pattern pattern = Pattern.compile("[\\w']+"); //Regex to match words and ignore punctuation
+
         //Start all Filter Threads
         t1.start();
         t2.start();
@@ -61,9 +63,9 @@ public class FilterBook_PipeAndFilterTest {
             String st;
             while((st = br.readLine()) != null){
                 //Gets words
-                String[] words = st.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
-                for(String word : words){
-                    startMQ.add(word);
+                Matcher matcher = pattern.matcher(st);
+                while(matcher.find()){
+                    startMQ.add(st.substring(matcher.start(), matcher.end()));
                 }
             }
         } catch (Exception ex) {
@@ -121,10 +123,10 @@ public class FilterBook_PipeAndFilterTest {
             ex.printStackTrace();
         }
 
-        BlockingQueue<String> startMQ = new LinkedBlockingQueue<String>();
-        BlockingQueue<String> stopwordsToNonAlphabetMQ = new LinkedBlockingQueue<String>();
-        BlockingQueue<String> nonAlphbetToStemMQ = new LinkedBlockingQueue<String>();
-        BlockingQueue<String> StemToWordCountMQ = new LinkedBlockingQueue<String>();
+        BlockingQueue<String> startMQ = new LinkedBlockingQueue<>();
+        BlockingQueue<String> stopwordsToNonAlphabetMQ = new LinkedBlockingQueue<>();
+        BlockingQueue<String> nonAlphbetToStemMQ = new LinkedBlockingQueue<>();
+        BlockingQueue<String> StemToWordCountMQ = new LinkedBlockingQueue<>();
 
         BaseFilter stopWordsFilter = new FilterStopWords(startMQ, stopwordsToNonAlphabetMQ, stopWords);
         BaseFilter nonAlphabetFilter = new FilterNonalphabeticWords(stopwordsToNonAlphabetMQ, nonAlphbetToStemMQ);
@@ -135,6 +137,10 @@ public class FilterBook_PipeAndFilterTest {
         Thread t2 = new Thread(nonAlphabetFilter);
         Thread t3 = new Thread(porterStemmerFilter);
         Thread t4 = new Thread(wordCountFilter);
+
+        Pattern pattern = Pattern.compile("[\\w']+"); //Regex to match words and ignore punctuation
+
+
 
         Long startFilters = new Long(0);
         Long stopFilters = new Long(0);
@@ -159,9 +165,9 @@ public class FilterBook_PipeAndFilterTest {
             String st;
             while((st = br.readLine()) != null){
                 //Gets words
-                String[] words = st.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
-                for(String word : words){
-                    startMQ.add(word);
+                Matcher matcher = pattern.matcher(st);
+                while(matcher.find()){
+                    startMQ.add(st.substring(matcher.start(), matcher.end()));
                 }
             }
             stopFileLoad = System.currentTimeMillis();
@@ -204,16 +210,6 @@ public class FilterBook_PipeAndFilterTest {
         wordCountFilter.print();
         Long stopWordcount = System.currentTimeMillis();
 
-        // Gets average runtime of each Message process of each Filter
-        System.out.println();
-        System.out.println("StopWords Filter - Average: " + stopWordsFilter.getAverageProcessTime());
-        System.out.println();
-        System.out.println("NonAlphabet Filter - Average: " + nonAlphabetFilter.getAverageProcessTime());
-        System.out.println();
-        System.out.println("PorterStemmerFilter Filter - Average:  " + porterStemmerFilter.getAverageProcessTime());
-        System.out.println();
-        System.out.println("WordCountFilter Filter - Average: " + wordCountFilter.getAverageProcessTime());
-
         System.out.println();
         System.out.println("Load File Time (milliseconds): " + (stopFileLoad - startFileLoad));
         System.out.println();
@@ -254,6 +250,8 @@ public class FilterBook_PipeAndFilterTest {
         Thread t3 = new Thread(porterStemmerFilter);
         Thread t4 = new Thread(wordCountFilter);
 
+        Pattern pattern = Pattern.compile("[\\w']+"); //Regex to match words and ignore punctuation
+
         //Start all Filter Threads
         t1.start();
         t2.start();
@@ -267,9 +265,9 @@ public class FilterBook_PipeAndFilterTest {
             String st;
             while((st = br.readLine()) != null){
                 //Gets words
-                String[] words = st.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
-                for(String word : words){
-                    startMQ.add(word);
+                Matcher matcher = pattern.matcher(st);
+                while(matcher.find()){
+                    startMQ.add(st.substring(matcher.start(), matcher.end()));
                 }
             }
         } catch (Exception ex) {

@@ -48,6 +48,8 @@ public class FilterBook_PipeAndFilter {
         Thread t3 = new Thread(porterStemmerFilter);
         Thread t4 = new Thread(wordCountFilter);
 
+        Pattern pattern = Pattern.compile("[\\w']+"); //Regex to match words and ignore punctuation
+
         //Start all Filter Threads
         t1.start();
         t2.start();
@@ -61,16 +63,16 @@ public class FilterBook_PipeAndFilter {
             String st;
             while((st = br.readLine()) != null){
                 //Gets words
-                String[] words = st.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
-                for(String word : words){
-                    startMQ.add(word);
+                Matcher matcher = pattern.matcher(st);
+                while(matcher.find()){
+                    startMQ.add(st.substring(matcher.start(), matcher.end()));
                 }
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
-        System.out.println("Parsed book.");
+        System.out.println("Parsed book " + inputfile);
 
         //Wait for queues to be empty after book has been read
         try {

@@ -1,7 +1,11 @@
 package edu.depaul.Filters;
 
+import org.junit.rules.Stopwatch;
+
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
@@ -9,14 +13,14 @@ public class BaseFilter implements IFilter, Runnable{
     protected BlockingQueue<String> fromQueue;
     protected BlockingQueue<String>  toQueue;
 
-    protected List<Long> processMessageTimes;
+    protected List<Float> processMessageTimes;
 
     private volatile boolean running = true;
 
     public BaseFilter(BlockingQueue<String>  FromQueue, BlockingQueue<String> ToQueue){
         this.fromQueue = FromQueue;
         this.toQueue = ToQueue;
-        processMessageTimes = new ArrayList<Long>();
+        processMessageTimes = new ArrayList<Float>();
     }
 
     public String filter(String input) {
@@ -24,13 +28,12 @@ public class BaseFilter implements IFilter, Runnable{
     }
 
     public void run() {
-        Long startTime = new Long(0);
-        Long stopTime = new Long(0);
+        float startTime = new Long(0);
+        float stopTime = new Long(0);
 
         while(running){
             if(!fromQueue.isEmpty()) {
                 // Get from Queue
-                startTime = System.currentTimeMillis();
                 String incoming = fromQueue.poll();
 
                 //Filter
@@ -40,7 +43,6 @@ public class BaseFilter implements IFilter, Runnable{
                 if (toQueue != null && (output != null && !output.isEmpty())) {
                     // Output to new Queue (if applicable)
                     toQueue.add(output);
-                    stopTime = System.currentTimeMillis();
                     processMessageTimes.add(stopTime - startTime);
                 }
             }
@@ -56,19 +58,19 @@ public class BaseFilter implements IFilter, Runnable{
         System.out.println("Base Filter Print :D This Filter has not defined a print.");
     }
 
-    public float getAverageProcessTime(){
+    public double getAverageProcessTime(){
         return calcAverage(processMessageTimes);
     }
 
-    private float calcAverage(List<Long> allTimes){
-        Long sum = new Long(0);
+    private double calcAverage(List<Float> allTimes){
+        float sum = 0;
 
         if(!allTimes.isEmpty()){
-            for(Long l : allTimes){
+            for(float l : allTimes){
                 sum = sum + l;
             }
 
-            return (float)sum / allTimes.size();
+            return (double)sum / allTimes.size();
         }
 
         return sum;

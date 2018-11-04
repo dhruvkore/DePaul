@@ -20,7 +20,6 @@ public class FilterFrequencyCount extends BaseFilter {
             return null;
         }
 
-        Long startTime = System.currentTimeMillis();
         if(wordCounts.containsKey(input)){
             wordCounts.put(input, wordCounts.get(input) + 1);
         }
@@ -28,9 +27,6 @@ public class FilterFrequencyCount extends BaseFilter {
             wordCounts.put(input, 1);
         }
 
-        Long stopTime = System.currentTimeMillis();
-        //Word Count Filter Object works differently so needs to be timed differently
-        processMessageTimes.add(stopTime - startTime);
         return null;
     }
 
