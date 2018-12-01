@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="0" name="edu.depaul.pipeandfilterbooks.FilterBook_PipeAndFilterTest" time="2.927" errors="0" skipped="0">
+<testsuite tests="3" failures="0" name="edu.depaul.pipeandfilterbooks.FilterBook_PipeAndFilterTest" time="1.058" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="10.0.1+10"/>
@@ -65,7 +65,7 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="edu.depaul.pipeandfilterbooks.FilterBook_PipeAndFilterTest" name="Alice30" time="0.11"/>
-  <testcase classname="edu.depaul.pipeandfilterbooks.FilterBook_PipeAndFilterTest" name="Kjbible" time="2.81"/>
-  <testcase classname="edu.depaul.pipeandfilterbooks.FilterBook_PipeAndFilterTest" name="USdeclar" time="0.007"/>
+  <testcase classname="edu.depaul.pipeandfilterbooks.FilterBook_PipeAndFilterTest" name="Alice30" time="0.085"/>
+  <testcase classname="edu.depaul.pipeandfilterbooks.FilterBook_PipeAndFilterTest" name="Kjbible" time="0.97"/>
+  <testcase classname="edu.depaul.pipeandfilterbooks.FilterBook_PipeAndFilterTest" name="USdeclar" time="0.003"/>
 </testsuite>
