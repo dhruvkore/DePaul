@@ -36,6 +36,7 @@ class puzzleState:
 						temp = self.matrix[i + 1][j]
 						self.matrix[i + 1][j] = 0
 						self.matrix[i][j] = temp
+						self.pathcost = self.pathcost + temp
 						return 1
 					else:
 						return 0
@@ -49,6 +50,7 @@ class puzzleState:
 						temp = self.matrix[i - 1][j]
 						self.matrix[i - 1][j] = 0
 						self.matrix[i][j] = temp
+						self.pathcost = self.pathcost + temp
 						return 1
 					else:
 						return 0
@@ -62,6 +64,7 @@ class puzzleState:
 						temp = self.matrix[i][j + 1]
 						self.matrix[i][j + 1] = 0
 						self.matrix[i][j] = temp
+						self.pathcost = self.pathcost + temp
 						return 1
 					else:
 						return 0
@@ -75,9 +78,21 @@ class puzzleState:
 						temp = self.matrix[i][j - 1]
 						self.matrix[i][j - 1] = 0
 						self.matrix[i][j] = temp
+						self.pathcost = self.pathcost + temp
 						return 1
 					else:
 						return 0
+
+	def copyContents(self, newState):
+		self.matrix = newState.matrix
+		self.action = newState.action
+		self.depth = newState.depth
+		self.pathcost = newState.pathcost
+		self.expanded = newState.expanded
+		self.cost = newState.cost
+
+		self.parent = newState.parent
+		self.children = newState.children
 
 	def compare(self, secondMatrix):
 		for i in range(3):
@@ -140,28 +155,28 @@ class eightPuzzleAlgorithms:
 			if currentState.compare(goal): #compare to goal
 				return currentState
 
-			up = puzzleState(currentState.cloneMatrix(), "UP", currentState.depth + 1, currentState.pathcost + 1, False)
+			up = puzzleState(currentState.cloneMatrix(), "UP", currentState.depth + 1, currentState.pathcost, False)
 			if up.moveUp() and up.printSequence() not in visited:
 				queue.append(up)
 				up.parent = currentState
 				currentState.children.append(up)
 				visited.add(up.printSequence()) #add to visited states
 
-			left = puzzleState(currentState.cloneMatrix(), "LEFT", currentState.depth + 1, currentState.pathcost + 1, False)
+			left = puzzleState(currentState.cloneMatrix(), "LEFT", currentState.depth + 1, currentState.pathcost, False)
 			if left.moveLeft() and left.printSequence() not in visited:
 				queue.append(left)
 				left.parent = currentState
 				currentState.children.append(left)
 				visited.add(left.printSequence())
 
-			down = puzzleState(currentState.cloneMatrix(), "DOWN", currentState.depth + 1, currentState.pathcost + 1, False)
+			down = puzzleState(currentState.cloneMatrix(), "DOWN", currentState.depth + 1, currentState.pathcost, False)
 			if down.moveDown() and down.printSequence() not in visited:
 				queue.append(down)
 				down.parent = currentState
 				currentState.children.append(down)
 				visited.add(down.printSequence())
 
-			right = puzzleState(currentState.cloneMatrix(), "RIGHT", currentState.depth + 1, currentState.pathcost + 1, False)
+			right = puzzleState(currentState.cloneMatrix(), "RIGHT", currentState.depth + 1, currentState.pathcost, False)
 			if right.moveRight() and right.printSequence() not in visited:
 				queue.append(right)
 				right.parent = currentState
@@ -187,22 +202,22 @@ class eightPuzzleAlgorithms:
 			if currentState.compare(goal):
 				return currentState
 
-			up = puzzleState(currentState.cloneMatrix(), "UP", currentState.depth + 1, currentState.pathcost + 1, False)
+			up = puzzleState(currentState.cloneMatrix(), "UP", currentState.depth + 1, currentState.pathcost, False)
 			if up.moveUp() and up.printSequence() not in visited:
 				queue.append(up)
 				visited.add(up.printSequence()) #add to visited states
 
-			left = puzzleState(currentState.cloneMatrix(), "LEFT", currentState.depth + 1, currentState.pathcost + 1, False)
+			left = puzzleState(currentState.cloneMatrix(), "LEFT", currentState.depth + 1, currentState.pathcost, False)
 			if left.moveLeft() and left.printSequence() not in visited:
 				queue.append(left)
 				visited.add(left.printSequence())
 
-			down = puzzleState(currentState.cloneMatrix(), "DOWN", currentState.depth + 1, currentState.pathcost + 1, False)
+			down = puzzleState(currentState.cloneMatrix(), "DOWN", currentState.depth + 1, currentState.pathcost, False)
 			if down.moveDown() and down.printSequence() not in visited:
 				queue.append(down)
 				visited.add(down.printSequence())
 
-			right = puzzleState(currentState.cloneMatrix(), "RIGHT", currentState.depth + 1, currentState.pathcost + 1, False)
+			right = puzzleState(currentState.cloneMatrix(), "RIGHT", currentState.depth + 1, currentState.pathcost, False)
 			if right.moveRight() and right.printSequence() not in visited:
 				queue.append(right)
 				visited.add(right.printSequence())
@@ -230,22 +245,22 @@ class eightPuzzleAlgorithms:
 				if currentState.depth == maxDepth: #If maxDepth reached, restart and increment maxDepth
 					break
 
-				up = puzzleState(currentState.cloneMatrix(), "UP", currentState.depth + 1, currentState.pathcost + 1, False)
+				up = puzzleState(currentState.cloneMatrix(), "UP", currentState.depth + 1, currentState.pathcost, False)
 				if up.moveUp() and up.printSequence() not in visited:
 					queue.append(up)
 					visited.add(up.printSequence()) #add to visited states
 
-				left = puzzleState(currentState.cloneMatrix(), "LEFT", currentState.depth + 1, currentState.pathcost + 1, False)
+				left = puzzleState(currentState.cloneMatrix(), "LEFT", currentState.depth + 1, currentState.pathcost, False)
 				if left.moveLeft() and left.printSequence() not in visited:
 					queue.append(left)
 					visited.add(left.printSequence())
 
-				down = puzzleState(currentState.cloneMatrix(), "DOWN", currentState.depth + 1, currentState.pathcost + 1, False)
+				down = puzzleState(currentState.cloneMatrix(), "DOWN", currentState.depth + 1, currentState.pathcost, False)
 				if down.moveDown() and down.printSequence() not in visited:
 					queue.append(down)
 					visited.add(down.printSequence())
 
-				right = puzzleState(currentState.cloneMatrix(), "RIGHT", currentState.depth + 1, currentState.pathcost + 1, False)
+				right = puzzleState(currentState.cloneMatrix(), "RIGHT", currentState.depth + 1, currentState.pathcost, False)
 				if right.moveRight() and right.printSequence() not in visited:
 					queue.append(right)
 					visited.add(right.printSequence())
@@ -271,53 +286,49 @@ class eightPuzzleAlgorithms:
 			if currentState.compare(goal):
 				return currentState
 
-			up = puzzleState(currentState.cloneMatrix(), "UP", currentState.depth + 1, currentState.pathcost + 1, False)
+			up = puzzleState(currentState.cloneMatrix(), "UP", currentState.depth + 1, currentState.pathcost, False)
 			if up.moveUp():
 				if up.printSequence() not in visited:
-					queue.put((up.pathcost, iteration, up))
-					visited[up.printSequence()] = up #add to visited states
-				else:
-					currentDuplicate = visited[up.printSequence()]
+					visited[up.printSequence()] = (up.pathcost, iteration, up) #add to visited states
+					queue.put(visited[up.printSequence()])
+					
+				elif not visited[up.printSequence()][2].expanded:
+					currentDuplicate = visited[up.printSequence()][2]
 					if currentDuplicate.pathcost > up.pathcost:
-						queue.remove(currentDuplicate)
-						queue.put((up.pathcost, iteration, up))
-						visited[up.printSequence()] = up
+						visited[up.printSequence()][2].copyContents(up)
 
-			left = puzzleState(currentState.cloneMatrix(), "LEFT", currentState.depth + 1, currentState.pathcost + 1, False)
+			left = puzzleState(currentState.cloneMatrix(), "LEFT", currentState.depth + 1, currentState.pathcost, False)
 			if left.moveLeft():
 				if left.printSequence() not in visited:
-					queue.put((left.pathcost, iteration, left))
-					visited[left.printSequence()] = left
-				else:
-					currentDuplicate = visited[left.printSequence()]
+					visited[left.printSequence()] = (left.pathcost, iteration, left) #add to visited states
+					queue.put(visited[left.printSequence()])
+					
+				elif not visited[left.printSequence()][2].expanded:
+					currentDuplicate = visited[left.printSequence()][2]
 					if currentDuplicate.pathcost > left.pathcost:
-						queue.remove(currentDuplicate)
-						queue.put((left.pathcost, iteration, left))
-						visited[left.printSequence()] = left
+						visited[left.printSequence()][2].copyContents(left)
 
-			down = puzzleState(currentState.cloneMatrix(), "DOWN", currentState.depth + 1, currentState.pathcost + 1, False)
+			down = puzzleState(currentState.cloneMatrix(), "DOWN", currentState.depth + 1, currentState.pathcost, False)
 			if down.moveDown():
 				if down.printSequence() not in visited:
-					queue.put((down.pathcost, iteration, down))
-					visited[down.printSequence()] = down
-				else:
-					currentDuplicate = visited[down.printSequence()]
+					visited[down.printSequence()] = (down.pathcost, iteration, down) #add to visited states
+					queue.put(visited[down.printSequence()])
+					
+				elif not visited[down.printSequence()][2].expanded:
+					currentDuplicate = visited[down.printSequence()][2]
 					if currentDuplicate.pathcost > down.pathcost:
-						queue.remove(currentDuplicate)
-						queue.put((down.pathcost, iteration, down))
-						visited[down.printSequence()] = down
+						visited[down.printSequence()][2].copyContents(down)
 
-			right = puzzleState(currentState.cloneMatrix(), "RIGHT", currentState.depth + 1, currentState.pathcost + 1, False)
+			right = puzzleState(currentState.cloneMatrix(), "RIGHT", currentState.depth + 1, currentState.pathcost, False)
 			if right.moveRight():
 				if right.printSequence() not in visited:
-					queue.put((right.pathcost, iteration, right))
-					visited[right.printSequence()] = right
-				else:
-					currentDuplicate = visited[right.printSequence()]
+					visited[right.printSequence()] = (right.pathcost, iteration, right) #add to visited states
+					queue.put(visited[right.printSequence()])
+					
+				elif not visited[right.printSequence()][2].expanded:
+					currentDuplicate = visited[right.printSequence()][2]
 					if currentDuplicate.pathcost > right.pathcost:
-						queue.remove(currentDuplicate)
-						queue.put((right.pathcost, iteration, right))
-						visited[right.printSequence()] = right
+						visited[right.printSequence()][2].copyContents(right)
 
 			currentState.expanded = True
 
