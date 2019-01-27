@@ -2,6 +2,7 @@
 
 import sys
 import collections
+from queue import PriorityQueue
 
 class puzzleState:
 	def __init__(self, matrix, action, depth, pathcost, expanded):
@@ -112,6 +113,14 @@ class puzzleState:
 				s = s + str(self.matrix[i][j])
 		return s
 
+	#Comparitors
+	def __eq__(self, other):
+		return self.pathcost == other.pathcost
+	def __lt__(self, other):
+		return self.pathcost < other.pathcost
+	def __gt__(self, other):
+		return self.pathcost > other.pathcost
+
 
 
 class eightPuzzleAlgorithms:
@@ -161,9 +170,10 @@ class eightPuzzleAlgorithms:
 
 			currentState.expanded = True
 
+
 	#Depth-First-Search
 	#Explores entire depth before going to the next sibling nodes
-	def dfs(initState, goal, maxDepth = 0):
+	def dfs(initState, goal):
 		queue = collections.deque([initState])
 		iteration = 0
 
@@ -200,6 +210,118 @@ class eightPuzzleAlgorithms:
 			currentState.expanded = True
 
 
+	def ids(initState, goal):
+		iteration = 0
+
+		maxDepth = 1
+
+		while maxDepth < 999999:
+			visited = set()
+
+			queue = collections.deque([initState])
+			while queue:
+				iteration = iteration + 1
+				currentState = queue.pop()
+				currentState.iteration = iteration
+				print("Depth: " + str(currentState.depth))
+				if currentState.compare(goal):
+					return currentState
+
+				if currentState.depth == maxDepth: #If maxDepth reached, restart and increment maxDepth
+					break
+
+				up = puzzleState(currentState.cloneMatrix(), "UP", currentState.depth + 1, currentState.pathcost + 1, False)
+				if up.moveUp() and up.printSequence() not in visited:
+					queue.append(up)
+					visited.add(up.printSequence()) #add to visited states
+
+				left = puzzleState(currentState.cloneMatrix(), "LEFT", currentState.depth + 1, currentState.pathcost + 1, False)
+				if left.moveLeft() and left.printSequence() not in visited:
+					queue.append(left)
+					visited.add(left.printSequence())
+
+				down = puzzleState(currentState.cloneMatrix(), "DOWN", currentState.depth + 1, currentState.pathcost + 1, False)
+				if down.moveDown() and down.printSequence() not in visited:
+					queue.append(down)
+					visited.add(down.printSequence())
+
+				right = puzzleState(currentState.cloneMatrix(), "RIGHT", currentState.depth + 1, currentState.pathcost + 1, False)
+				if right.moveRight() and right.printSequence() not in visited:
+					queue.append(right)
+					visited.add(right.printSequence())
+
+				currentState.expanded = True
+
+			maxDepth = maxDepth + 1
+
+
+	def ucs(initState, goal):
+		iteration = 0
+
+		visited = {}
+
+		queue = PriorityQueue()
+		queue.put((initState.pathcost, iteration, initState))
+
+		while queue:
+			iteration = iteration + 1
+			currentStateTuple = queue.get()
+			currentState = currentStateTuple[2]
+			currentState.iteration = iteration
+			if currentState.compare(goal):
+				return currentState
+
+			up = puzzleState(currentState.cloneMatrix(), "UP", currentState.depth + 1, currentState.pathcost + 1, False)
+			if up.moveUp():
+				if up.printSequence() not in visited:
+					queue.put((up.pathcost, iteration, up))
+					visited[up.printSequence()] = up #add to visited states
+				else:
+					currentDuplicate = visited[up.printSequence()]
+					if currentDuplicate.pathcost > up.pathcost:
+						queue.remove(currentDuplicate)
+						queue.put((up.pathcost, iteration, up))
+						visited[up.printSequence()] = up
+
+			left = puzzleState(currentState.cloneMatrix(), "LEFT", currentState.depth + 1, currentState.pathcost + 1, False)
+			if left.moveLeft():
+				if left.printSequence() not in visited:
+					queue.put((left.pathcost, iteration, left))
+					visited[left.printSequence()] = left
+				else:
+					currentDuplicate = visited[left.printSequence()]
+					if currentDuplicate.pathcost > left.pathcost:
+						queue.remove(currentDuplicate)
+						queue.put((left.pathcost, iteration, left))
+						visited[left.printSequence()] = left
+
+			down = puzzleState(currentState.cloneMatrix(), "DOWN", currentState.depth + 1, currentState.pathcost + 1, False)
+			if down.moveDown():
+				if down.printSequence() not in visited:
+					queue.put((down.pathcost, iteration, down))
+					visited[down.printSequence()] = down
+				else:
+					currentDuplicate = visited[down.printSequence()]
+					if currentDuplicate.pathcost > down.pathcost:
+						queue.remove(currentDuplicate)
+						queue.put((down.pathcost, iteration, down))
+						visited[down.printSequence()] = down
+
+			right = puzzleState(currentState.cloneMatrix(), "RIGHT", currentState.depth + 1, currentState.pathcost + 1, False)
+			if right.moveRight():
+				if right.printSequence() not in visited:
+					queue.put((right.pathcost, iteration, right))
+					visited[right.printSequence()] = right
+				else:
+					currentDuplicate = visited[right.printSequence()]
+					if currentDuplicate.pathcost > right.pathcost:
+						queue.remove(currentDuplicate)
+						queue.put((right.pathcost, iteration, right))
+						visited[right.printSequence()] = right
+
+			currentState.expanded = True
+
+
 def main(argv):
 	goal = [[1,2,3], [8,0,4], [7,6,5]]
 	start = [[1,2,3], [8,0,4], [7,6,5]]
@@ -230,6 +352,12 @@ def main(argv):
 			solution = eightPuzzleAlgorithms.dfs(startPuzzleState, goal)
 			solution.printInfo()
 			#solution.printSolution()
+		elif algorithm == "ids":
+			solution = eightPuzzleAlgorithms.ids(startPuzzleState, goal)
+			solution.printInfo()
+		elif algorithm == "ucs":
+			solution = eightPuzzleAlgorithms.ucs(startPuzzleState, goal)
+			solution.printInfo()
 
 
 
