@@ -93,17 +93,17 @@ class puzzleState:
 		print("---")
 
 	def printInfo(self):
-		#if self.action is not None:
-			#print(self.action + ", ", end='')
 		print("Length (depth)" + str(self.depth) + " Cost = " + str(self.pathcost) + " Time (iterations): " + str(self.iteration))
-		#puzzleState.printMatrix(self.matrix)
 
 
 	def printSolution(self):
 		if self.parent is not None:
 			self.parent.printSolution()
 
-		self.printInfo()
+		if self.action is not None:
+			print(self.action + ", ", end='')
+		print("Length (depth)" + str(self.depth) + " Cost = " + str(self.pathcost) + " Time (iterations): " + str(self.iteration))
+		puzzleState.printMatrix(self.matrix)
 
 	def printSequence(self):
 		s = ""
@@ -119,8 +119,6 @@ class eightPuzzleAlgorithms:
 	#Explores entire current depth before moving to next depth
 	def bfs(initState, goal):
 		queue = collections.deque([initState]) #queue
-		pathcost = 1
-		depth = 1
 		iteration = 0
 
 		visited = set()
@@ -129,10 +127,6 @@ class eightPuzzleAlgorithms:
 			iteration = iteration + 1
 			currentState = queue.popleft() #remove from leftside of the queue
 			currentState.iteration = iteration
-
-			if currentState.action is not None:
-				print("Action: " + currentState.action + " Depth: " + str(currentState.depth))
-			puzzleState.printMatrix(currentState.matrix)
 
 			if currentState.compare(goal): #compare to goal
 				return currentState
@@ -169,10 +163,8 @@ class eightPuzzleAlgorithms:
 
 	#Depth-First-Search
 	#Explores entire depth before going to the next sibling nodes
-	def dfs(initState, goal):
+	def dfs(initState, goal, maxDepth = 0):
 		queue = collections.deque([initState])
-		pathcost = 1
-		depth = 1
 		iteration = 0
 
 		visited = set()
@@ -188,29 +180,21 @@ class eightPuzzleAlgorithms:
 			up = puzzleState(currentState.cloneMatrix(), "UP", currentState.depth + 1, currentState.pathcost + 1, False)
 			if up.moveUp() and up.printSequence() not in visited:
 				queue.append(up)
-				up.parent = currentState
-				currentState.children.append(up)
 				visited.add(up.printSequence()) #add to visited states
 
 			left = puzzleState(currentState.cloneMatrix(), "LEFT", currentState.depth + 1, currentState.pathcost + 1, False)
 			if left.moveLeft() and left.printSequence() not in visited:
 				queue.append(left)
-				left.parent = currentState
-				currentState.children.append(left)
 				visited.add(left.printSequence())
 
 			down = puzzleState(currentState.cloneMatrix(), "DOWN", currentState.depth + 1, currentState.pathcost + 1, False)
 			if down.moveDown() and down.printSequence() not in visited:
 				queue.append(down)
-				down.parent = currentState
-				currentState.children.append(down)
 				visited.add(down.printSequence())
 
 			right = puzzleState(currentState.cloneMatrix(), "RIGHT", currentState.depth + 1, currentState.pathcost + 1, False)
 			if right.moveRight() and right.printSequence() not in visited:
 				queue.append(right)
-				right.parent = currentState
-				currentState.children.append(right)
 				visited.add(right.printSequence())
 
 			currentState.expanded = True
