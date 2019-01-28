@@ -2,6 +2,7 @@
 
 import sys
 import collections
+import math
 from queue import PriorityQueue
 
 class puzzleState:
@@ -109,7 +110,7 @@ class puzzleState:
 		print("---")
 
 	def printInfo(self):
-		print("Length (depth)" + str(self.depth) + " Cost = " + str(self.pathcost) + " Time (iterations): " + str(self.iteration))
+		print("Length (depth)" + str(self.depth) + " Cost = " + str(self.pathcost) + " Time (iterations): " + str(self.iteration) + " Space (Max Queue Size): " + str(self.maxQueueSize))
 
 
 	def printSolution(self):
@@ -118,7 +119,7 @@ class puzzleState:
 
 		if self.action is not None:
 			print(self.action + ", ", end='')
-		print("Length (depth)" + str(self.depth) + " Cost = " + str(self.pathcost) + " Time (iterations): " + str(self.iteration))
+		print("Length (depth)" + str(self.depth) + " Cost = " + str(self.pathcost) + " Time (iterations): " + str(self.iteration) + " Space (Max Queue Size): " + str(self.maxQueueSize))
 		puzzleState.printMatrix(self.matrix)
 
 	def printSequence(self):
@@ -146,13 +147,20 @@ class eightPuzzleAlgorithms:
 		iteration = 0
 
 		visited = set()
+		maxQueueSize = 1
 
 		while queue:
 			iteration = iteration + 1
 			currentState = queue.popleft() #remove from leftside of the queue
 			currentState.iteration = iteration
+			if len(queue) > maxQueueSize:
+				maxQueueSize = len(queue)
+				currentState.maxQueueSize = maxQueueSize
+			else:
+				currentState.maxQueueSize = maxQueueSize
 
 			if currentState.compare(goal): #compare to goal
+				print("Final Maxqueue size: " + str(currentState.maxQueueSize))
 				return currentState
 
 			up = puzzleState(currentState.cloneMatrix(), "UP", currentState.depth + 1, currentState.pathcost, False)
@@ -193,11 +201,17 @@ class eightPuzzleAlgorithms:
 		iteration = 0
 
 		visited = set()
+		maxQueueSize = 1
 
 		while queue:
 			iteration = iteration + 1
 			currentState = queue.pop()
 			currentState.iteration = iteration
+			if  len(queue) > maxQueueSize:
+				maxQueueSize = len(queue)
+				currentState.maxQueueSize = maxQueueSize
+			else:
+				currentState.maxQueueSize = maxQueueSize
 
 			if currentState.compare(goal):
 				return currentState
@@ -229,6 +243,7 @@ class eightPuzzleAlgorithms:
 		iteration = 0
 
 		maxDepth = 1
+		maxQueueSize = 1
 
 		while maxDepth < 999999:
 			visited = set()
@@ -238,7 +253,12 @@ class eightPuzzleAlgorithms:
 				iteration = iteration + 1
 				currentState = queue.pop()
 				currentState.iteration = iteration
-				print("Depth: " + str(currentState.depth))
+				if queue.qsize() > maxQueueSize:
+					maxQueueSize = queue.qsize()
+					currentState.maxQueueSize = maxQueueSize
+				else:
+					currentState.maxQueueSize = maxQueueSize
+
 				if currentState.compare(goal):
 					return currentState
 
@@ -277,12 +297,19 @@ class eightPuzzleAlgorithms:
 
 		queue = PriorityQueue()
 		queue.put((initState.pathcost, iteration, initState))
+		maxQueueSize = 1
 
 		while queue:
 			iteration = iteration + 1
 			currentStateTuple = queue.get()
 			currentState = currentStateTuple[2]
 			currentState.iteration = iteration
+			if queue.qsize() > maxQueueSize:
+				maxQueueSize = queue.qsize()
+				currentState.maxQueueSize = maxQueueSize
+			else:
+				currentState.maxQueueSize = maxQueueSize
+
 			if currentState.compare(goal):
 				return currentState
 
@@ -332,6 +359,155 @@ class eightPuzzleAlgorithms:
 
 			currentState.expanded = True
 
+	def gbf(initState, goal):
+		return eightPuzzleAlgorithms.heuristicAlgo(initState, goal, eightPuzzleAlgorithms.gbfStrategy)
+
+	def gbfStrategy(state, goal):
+		notInPosition = 0
+		for i in range(3):
+			for j in range(3):
+				if state.matrix[i][j] != goal[i][j]:
+					notInPosition = notInPosition + 1
+
+		return notInPosition
+
+	def aStarOne(initState, goal):
+		return eightPuzzleAlgorithms.heuristicAlgo(initState, goal, eightPuzzleAlgorithms.aStarOneStrategy)
+
+	def aStarOneStrategy(state, goal):
+		notInPosition = 0
+		for i in range(3):
+			for j in range(3):
+				if state.matrix[i][j] != goal[i][j]:
+					notInPosition = notInPosition + 1
+
+		return notInPosition + state.pathcost
+
+
+	def aStarTwo(initState, goal):
+		return eightPuzzleAlgorithms.heuristicAlgo(initState, goal, eightPuzzleAlgorithms.aStarTwoStrategy)
+
+	def aStarTwoStrategy(state, goal):
+		numToPosition = {
+			1:(0,0), 2:(0,1), 3:(0,2),
+			8:(1,0), 0:(1,1), 4:(1,2),
+			7:(2,0), 6:(2,1), 5:(2,2)
+		}
+
+		sumOfDists = 0
+		for i in range(3):
+			for j in range(3):
+				sumOfDists = sumOfDists + eightPuzzleAlgorithms.manhattandistance((i,j), numToPosition[state.matrix[i][j]])
+
+		return sumOfDists + state.pathcost
+
+	def manhattandistance(one, two):
+		return (abs(one[0] - one[1]) + abs(two[0] - two[1]))
+
+	def euclideandistance(one, two):
+		return math.sqrt((one[0]-two[0])**2 + (one[1]-two[1])**2)
+
+	def aStarThree(initState, goal):
+		return eightPuzzleAlgorithms.heuristicAlgo(initState, goal, eightPuzzleAlgorithms.aStarThreeStrategy)
+
+	# heuristic uses Euclidean
+	def aStarThreeStrategy(state, goal):
+		numToPosition = {
+			1:(0,0), 2:(0,1), 3:(0,2),
+			8:(1,0), 0:(1,1), 4:(1,2),
+			7:(2,0), 6:(2,1), 5:(2,2)
+		}
+		sumOfDists = 0
+		for i in range(3):
+			for j in range(3):
+				sumOfDists = sumOfDists + eightPuzzleAlgorithms.euclideandistance((i,j), numToPosition[state.matrix[i][j]])
+
+		return sumOfDists + state.pathcost
+
+
+
+	def heuristicAlgo(initState, goal, f):
+		iteration = 0
+
+		visited = {}
+
+		queue = PriorityQueue()
+		queue.put((initState.pathcost, iteration, initState))
+
+		maxQueueSize = 1
+
+		while queue:
+			iteration = iteration + 1
+			currentStateTuple = queue.get()
+			currentState = currentStateTuple[2]
+			currentState.iteration = iteration
+			if queue.qsize() > maxQueueSize:
+				maxQueueSize = queue.qsize()
+				currentState.maxQueueSize = maxQueueSize
+			else:
+				currentState.maxQueueSize = maxQueueSize
+
+			if currentState.compare(goal):
+				return currentState
+
+			up = puzzleState(currentState.cloneMatrix(), "UP", currentState.depth + 1, currentState.pathcost, False)
+			if up.moveUp():
+				up.parent = currentState
+				currentState.children.append(up)
+
+				if up.printSequence() not in visited:
+					visited[up.printSequence()] = (f(up, goal), iteration, up) #add to visited states
+					queue.put(visited[up.printSequence()])
+					
+				elif not visited[up.printSequence()][2].expanded:
+					currentDuplicate = visited[up.printSequence()][2]
+					if f(currentDuplicate, goal) > f(up, goal):
+						visited[up.printSequence()][2].copyContents(up)
+
+			left = puzzleState(currentState.cloneMatrix(), "LEFT", currentState.depth + 1, currentState.pathcost, False)
+			if left.moveLeft():
+				left.parent = currentState
+				currentState.children.append(left)
+
+				if left.printSequence() not in visited:
+					visited[left.printSequence()] = (f(left, goal), iteration, left) #add to visited states
+					queue.put(visited[left.printSequence()])
+					
+				elif not visited[left.printSequence()][2].expanded:
+					currentDuplicate = visited[left.printSequence()][2]
+					if f(currentDuplicate, goal) > f(left, goal):
+						visited[left.printSequence()][2].copyContents(left)
+
+			down = puzzleState(currentState.cloneMatrix(), "DOWN", currentState.depth + 1, currentState.pathcost, False)
+			if down.moveDown():
+				down.parent = currentState
+				currentState.children.append(down)
+
+				if down.printSequence() not in visited:
+					visited[down.printSequence()] = (f(down, goal), iteration, down) #add to visited states
+					queue.put(visited[down.printSequence()])
+					
+				elif not visited[down.printSequence()][2].expanded:
+					currentDuplicate = visited[down.printSequence()][2]
+					if f(currentDuplicate, goal) > f(down, goal):
+						visited[down.printSequence()][2].copyContents(down)
+
+			right = puzzleState(currentState.cloneMatrix(), "RIGHT", currentState.depth + 1, currentState.pathcost, False)
+			if right.moveRight():
+				right.parent = currentState
+				currentState.children.append(right)
+
+				if right.printSequence() not in visited:
+					visited[right.printSequence()] = (f(right, goal), iteration, right) #add to visited states
+					queue.put(visited[right.printSequence()])
+					
+				elif not visited[right.printSequence()][2].expanded:
+					currentDuplicate = visited[right.printSequence()][2]
+					if f(currentDuplicate, goal) > f(right, goal):
+						visited[right.printSequence()][2].copyContents(right)
+
+			currentState.expanded = True
+
 
 def main(argv):
 	goal = [[1,2,3], [8,0,4], [7,6,5]]
@@ -369,7 +545,18 @@ def main(argv):
 		elif algorithm == "ucs":
 			solution = eightPuzzleAlgorithms.ucs(startPuzzleState, goal)
 			solution.printInfo()
-
+		elif algorithm == "gbf":
+			solution = eightPuzzleAlgorithms.gbf(startPuzzleState, goal)
+			solution.printInfo()
+		elif algorithm == "a*1":
+			solution = eightPuzzleAlgorithms.aStarOne(startPuzzleState, goal)
+			solution.printInfo()
+		elif algorithm == "a*2":
+			solution = eightPuzzleAlgorithms.aStarTwo(startPuzzleState, goal)
+			solution.printSolution()
+		elif algorithm == "a*3":
+			solution = eightPuzzleAlgorithms.aStarThree(startPuzzleState, goal)
+			solution.printSolution()
 
 
 
