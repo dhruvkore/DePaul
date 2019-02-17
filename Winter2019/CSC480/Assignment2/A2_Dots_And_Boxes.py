@@ -178,8 +178,8 @@ class Algorithm:
     def miniMax(currentStateNode, ply):
 
         for i in range(currentStateNode.currentState.actualYArraySize):
-            for j in range(currentStateNode.currentState.actualYArraySize):
-                if currentStateNode.currentState.matrix[i][j] == ' ' and (i, j) not in currentStateNode.children:
+            for j in range(currentStateNode.currentState.actualXArraySize):
+                if currentStateNode.currentState.matrix[i][j] == ' ' and (j, i) not in currentStateNode.children:
                     currentStateNode.createChild(j, i, True)
                     if ply < 2:
                         return (i, j)
@@ -188,7 +188,7 @@ class Algorithm:
         x = 0
         y = 0
         for key, child in currentStateNode.children.items():
-            currentMaxMin = Algorithm.Max(child, ply - 1)
+            currentMaxMin = Algorithm.Max(child, ply - 1, minScore)
             # print("currentMaxMins: " + str(currentMaxMin))
             if minScore > currentMaxMin:
                 minScore = currentMaxMin
@@ -199,13 +199,13 @@ class Algorithm:
         return (x, y)
 
 
-    def Max(currentStateNode, ply):
+    def Max(currentStateNode, ply, alphaScore):
         if ply == 0:
             return currentStateNode.currentStateScore
 
         for i in range(currentStateNode.currentState.actualYArraySize):
-            for j in range(currentStateNode.currentState.actualYArraySize):
-                if currentStateNode.currentState.matrix[i][j] == ' ':
+            for j in range(currentStateNode.currentState.actualXArraySize):
+                if currentStateNode.currentState.matrix[i][j] == ' ' and (j, i) not in currentStateNode.children:
                     # print("testing: " + " | X: " + str(j) + " Y: " + str(i))
                     currentStateNode.createChild(j, i, False)
                     # print("^ points: " + str(currentStateNode.children[(j, i)].currentStateScore))
@@ -214,34 +214,36 @@ class Algorithm:
         x = 0
         y = 0
         for key, child in currentStateNode.children.items():
-            currentMaxMin = Algorithm.Min(child, ply - 1)
+            currentMaxMin = Algorithm.Min(child, ply - 1, maxScore)
             if maxScore < currentMaxMin:
                 maxScore = currentMaxMin
-                x = key[0]
-                y = key[1]
+            if currentMaxMin > alphaScore:
+                # print("Skipped Min Tree")
+                return currentMaxMin
 
         # print("Max returning: " + str(maxScore) + " | X: " + str(x) + " Y: " + str(y))
         return maxScore
 
 
-    def Min(currentStateNode, ply):
+    def Min(currentStateNode, ply, betaScore):
         if ply == 0:
             return currentStateNode.currentStateScore
 
         for i in range(currentStateNode.currentState.actualYArraySize):
-            for j in range(currentStateNode.currentState.actualYArraySize):
-                if currentStateNode.currentState.matrix[i][j] == ' ' and (i, j) not in currentStateNode.children:
+            for j in range(currentStateNode.currentState.actualXArraySize):
+                if currentStateNode.currentState.matrix[i][j] == ' ' and (j, i) not in currentStateNode.children:
                     currentStateNode.createChild(j, i, True)
 
         minScore = 9999
         x = 0
         y = 0
         for key, child in currentStateNode.children.items():
-            currentMaxMin = Algorithm.Max(child, ply - 1)
+            currentMaxMin = Algorithm.Max(child, ply - 1, minScore)
             if minScore > currentMaxMin:
                 minScore = currentMaxMin
-                x = key[0]
-                y = key[1]
+            if currentMaxMin < betaScore:
+                # print("Skipped Max Tree")
+                return currentMaxMin
 
         # print("Min returning: " + str(minScore) + " | X: " + str(x) + " Y: " + str(y))
         return minScore
