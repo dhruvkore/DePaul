@@ -24,7 +24,7 @@ class Node:
         # print("Set (" + str(x) + ", " + str(y) + ") Score set to: " + str(self.children[(x, y)].currentStateScore))
 
     def addChildren(self, x, y, childNode):
-        self.children[(x,y)] = childNode
+        self.children[(x, y)] = childNode
 
     def printBoard(self):
         self.currentState.printMatrix()
