@@ -13,3 +13,7 @@
   <br />&nbsp;&nbsp;&nbsp;&nbsp;SE 480 Software Architecture I -> Look at for Example of Maven + Testcase On Build
   <br />&nbsp;&nbsp;&nbsp;&nbsp;CSC 435 Distributed Systems I -> Look at for Examples of Servers (WebServer, Multithread Client-Server, TCP Client-Server, Blockchain project is incomplete but mostly works.)
 </p>
+<p>Winter 2018-2019
+  <br />&nbsp;&nbsp;&nbsp;&nbsp;CSC 480 Artificial Intelligence 1 -> Python search algorithms
+  <br />&nbsp;&nbsp;&nbsp;&nbsp;CSC 575 Intelligent Information Retrieval -> Building a search engine. Indexing Web Pages
+</p>
