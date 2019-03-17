@@ -36,31 +36,22 @@ class BabyNameGenerator:
     def createMarkovModel(self, markovModel, namesFile):
         with open(namesFile) as fileIn:
             for line in fileIn:
-                firstLetter = "__" + line[0]
-                if firstLetter not in markovModel.keys():
-                    markovModel[firstLetter] = letterProbabilty(1)
-                else:
-                    markovModel[firstLetter].probability += 1
+                previousStr = "__"
+                currentline = line[:-1] + "__"
 
-                previousLetter = firstLetter
-
-                for letter in line[1:-1]:
-                    if letter not in markovModel.keys():
-                        markovModel[letter] = letterProbabilty(1)
+                for letter in currentline:
+                    if previousStr not in markovModel.keys():
+                        markovModel[previousStr] = letterProbabilty(1)
                     else:
-                        markovModel[letter].probability += 1
+                        markovModel[previousStr].probability += 1
 
-                    if letter not in markovModel[previousLetter].nextLetterAndProbability.keys():
-                        markovModel[previousLetter].nextLetterAndProbability[letter] = 1
+                    if letter not in markovModel[previousStr].nextLetterAndProbability.keys():
+                        markovModel[previousStr].nextLetterAndProbability[letter] = 1
                     else:
-                        markovModel[previousLetter].nextLetterAndProbability[letter] += 1
+                        markovModel[previousStr].nextLetterAndProbability[letter] += 1
 
-                    previousLetter = letter
+                    previousStr = previousStr[-1] + letter
 
-                if '__' not in markovModel[previousLetter].nextLetterAndProbability.keys():
-                    markovModel[previousLetter].nextLetterAndProbability['__'] = 1
-                else:
-                    markovModel[previousLetter].nextLetterAndProbability['__'] += 1
 
     def generateName(self):
         if self.gender == "m":
@@ -80,15 +71,13 @@ class BabyNameGenerator:
             validName = False
             while not validName:
                 outputName = ''
-                # First Letter
-                previousLetter = self.getFirstLetter(markovModel)
-                outputName = outputName + previousLetter[2]
-
                 nextLetter = ''
-                while nextLetter != "__":
+                previousStr = "__"
+
+                while nextLetter != "_":
                     outputName = outputName + nextLetter
-                    nextLetter = self.getNextLetter(markovModel, previousLetter)
-                    previousLetter = nextLetter
+                    nextLetter = self.getNextLetter(markovModel, previousStr)
+                    previousStr = previousStr[-1] + nextLetter
 
                 if len(outputName) >= minNameLength and len(outputName) <= maxNameLength:
                     validName = True
@@ -96,33 +85,12 @@ class BabyNameGenerator:
 
             print("i: " + outputName)
 
-    def getFirstLetter(self, markovModel):
+    def getNextLetter(self, markovModel, prevStr):
         totalOccurances = 0
         letters = []
         probs = []
 
-        for letter in ascii_uppercase:
-            currentLetter = "__" + letter
-            if currentLetter in markovModel.keys():
-                totalOccurances += markovModel[currentLetter].probability
-
-        for letter in ascii_uppercase:
-            currentLetter = "__" + letter
-            if currentLetter in markovModel.keys():
-                letters.append("__" + letter)
-                probs.append(markovModel["__" + letter].probability / totalOccurances)
-
-        chosenLetter = np.random.choice(letters, p=probs)
-        #print("Chosen First Letter: " + chosenLetter)
-
-        return chosenLetter
-
-    def getNextLetter(self, markovModel, prevLetter):
-        totalOccurances = 0
-        letters = []
-        probs = []
-
-        currentLetters = markovModel[prevLetter].nextLetterAndProbability
+        currentLetters = markovModel[prevStr].nextLetterAndProbability
 
         for key, val in currentLetters.items():
             totalOccurances += val
@@ -132,7 +100,7 @@ class BabyNameGenerator:
             probs.append(val / totalOccurances)
 
         chosenLetter = np.random.choice(letters, p=probs)
-        #print("Chosen Next Letter: " + chosenLetter)
+        # print("Chosen Next Letter: " + chosenLetter)
 
         return chosenLetter
 
