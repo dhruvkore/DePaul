@@ -1,4 +1,6 @@
-from string import ascii_uppercase
+# Dhruv Kore
+# CSC 480 Assignment 4
+# Baby Name Generator
 
 import numpy as np
 
@@ -23,7 +25,6 @@ class BabyNameGenerator:
         self.createFemaleMarkovModel()
 
     # Generate Markov Models from Files
-
     def CreateMarkovModels(self):
         self.createMaleMarkovModel()
         self.createFeMaleMarkovModel()
@@ -59,7 +60,6 @@ class BabyNameGenerator:
                     # print(previousStr)
 
     # Generate Name from Markov Model with given parameters
-
     def generateName(self):
         if self.gender == "m":
             babynamegenerator.generateMaleName()
@@ -72,6 +72,8 @@ class BabyNameGenerator:
     def generateFemaleName(self):
         return self.runNameGenerator(self.femaleMarkovModel)
 
+
+    # Prints names generated from Markov Model
     def runNameGenerator(self, markovModel):
         for i in range(self.numOfNames):
             outputName = ''
@@ -97,6 +99,7 @@ class BabyNameGenerator:
 
             print(str(i + 1) + ": " + outputName)
 
+    # Gets next letter dependent on Previous letters and probability
     def getNextLetter(self, markovModel, prevStr):
         totalOccurances = 0
         letters = []
@@ -109,7 +112,7 @@ class BabyNameGenerator:
 
         for key, val in currentLetters.items():
             letters.append(key)
-            probs.append(val / totalOccurances)
+            probs.append(val / totalOccurances) # Normalize the probabilities
 
         chosenLetter = np.random.choice(letters, p=probs)
         # print("Chosen Next Letter: " + chosenLetter)
@@ -120,7 +123,7 @@ class BabyNameGenerator:
 class letterProbabilty:
     def __init__(self, probability):
         self.probability = probability
-        self.nextLetterAndProbability = {}
+        self.nextLetterAndProbability = {} # letter to Frequency
 
 
 if __name__ == '__main__':
