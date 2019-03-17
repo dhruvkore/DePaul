@@ -22,6 +22,8 @@ class BabyNameGenerator:
         self.createMaleMarkovModel()
         self.createFemaleMarkovModel()
 
+    # Generate Markov Models from Files
+
     def CreateMarkovModels(self):
         self.createMaleMarkovModel()
         self.createFeMaleMarkovModel()
@@ -53,8 +55,10 @@ class BabyNameGenerator:
                         markovModel[previousStr].nextLetterAndProbability[letter] += 1
 
                     previousStr = previousStr[self.bufferIndexSize:] + letter
-                    #print(previousStr)
 
+                    # print(previousStr)
+
+    # Generate Name from Markov Model with given parameters
 
     def generateName(self):
         if self.gender == "m":
@@ -76,12 +80,15 @@ class BabyNameGenerator:
                 outputName = ''
                 nextLetter = ''
                 previousStr = ''
-                for i in range(orderOfModel):
+                for j in range(orderOfModel):
                     previousStr += "_"
 
                 while nextLetter != "_":
                     outputName = outputName + nextLetter
                     nextLetter = self.getNextLetter(markovModel, previousStr)
+
+                    # print("Previous Str: " + previousStr + " next letter: " + nextLetter)
+
                     previousStr = previousStr[self.bufferIndexSize:] + nextLetter
 
                 if len(outputName) >= minNameLength and len(outputName) <= maxNameLength:
