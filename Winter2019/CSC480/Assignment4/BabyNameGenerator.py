@@ -10,8 +10,6 @@ class BabyNameGenerator:
         self.femaleMarkovModel = {}
         self.boyNamesFile = "namesBoys.txt"
         self.girlNamesFile = "namesGirls.txt"
-        self.createMaleMarkovModel()
-        self.createFemaleMarkovModel()
 
         self.gender = gender
         self.minNameLength = minNameLength
@@ -19,9 +17,10 @@ class BabyNameGenerator:
         self.orderOfModel = orderOfModel
         self.numOfNames = numOfNames
 
+        self.bufferIndexSize = -1 * (orderOfModel - 1)
 
-    def generateName(self):
-        print('Generate Name here')
+        self.createMaleMarkovModel()
+        self.createFemaleMarkovModel()
 
     def CreateMarkovModels(self):
         self.createMaleMarkovModel()
@@ -36,7 +35,10 @@ class BabyNameGenerator:
     def createMarkovModel(self, markovModel, namesFile):
         with open(namesFile) as fileIn:
             for line in fileIn:
-                previousStr = "__"
+                previousStr = ""
+
+                for i in range(orderOfModel):
+                    previousStr += "_"
                 currentline = line[:-1] + "__"
 
                 for letter in currentline:
@@ -50,7 +52,8 @@ class BabyNameGenerator:
                     else:
                         markovModel[previousStr].nextLetterAndProbability[letter] += 1
 
-                    previousStr = previousStr[-1] + letter
+                    previousStr = previousStr[self.bufferIndexSize:] + letter
+                    #print(previousStr)
 
 
     def generateName(self):
@@ -72,18 +75,20 @@ class BabyNameGenerator:
             while not validName:
                 outputName = ''
                 nextLetter = ''
-                previousStr = "__"
+                previousStr = ''
+                for i in range(orderOfModel):
+                    previousStr += "_"
 
                 while nextLetter != "_":
                     outputName = outputName + nextLetter
                     nextLetter = self.getNextLetter(markovModel, previousStr)
-                    previousStr = previousStr[-1] + nextLetter
+                    previousStr = previousStr[self.bufferIndexSize:] + nextLetter
 
                 if len(outputName) >= minNameLength and len(outputName) <= maxNameLength:
                     validName = True
 
 
-            print("i: " + outputName)
+            print(str(i + 1) + ": " + outputName)
 
     def getNextLetter(self, markovModel, prevStr):
         totalOccurances = 0
@@ -128,17 +133,22 @@ if __name__ == '__main__':
 
         while minNameLength is not int and minNameLength < 1:
             minNameLength = int(input("Enter minimum name length: "))
-            if minNameLength == "exit":
+            if minNameLength == -1:
                 exit()
 
         while maxNameLength is not int and maxNameLength < 1:
             maxNameLength = int(input("Enter maximum name length. Greater than " + str(minNameLength) + ": "))
-            if maxNameLength == "exit":
+            if maxNameLength == -1:
+                exit()
+
+        while orderOfModel is not int and orderOfModel < 1:
+            orderOfModel = int(input("Enter Order of Markov Model: "))
+            if orderOfModel == -1:
                 exit()
 
         while numOfNames is not int and numOfNames < 1:
             numOfNames = int(input("Enter number of names: "))
-            if numOfNames == "exit":
+            if numOfNames == -1:
                 exit()
 
         babynamegenerator = BabyNameGenerator(gender, minNameLength, maxNameLength, orderOfModel, numOfNames)
