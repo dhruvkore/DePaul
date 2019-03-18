@@ -54,7 +54,9 @@ class crawler:
 
 				for link in myparser.links:
 					# if link.startswith(self.site) and self.isValidHtmlPage(link):
-					if not link.startswith("/") and "depaul.edu" in urlparse(self.site).hostname and self.isValidHtmlPage(link): # DePaul domain constrain required in prompt
+					# searchDomain = urlparse(link).hostname
+					# print("Search Domain: " + str(searchDomain))
+					if not link.startswith("/") and "depaul.edu" in str(urlparse(link).hostname) and self.isValidHtmlPage(link): # DePaul domain constrain required in prompt
 						queue.put(link)
 						# print(str(numOfSites) + ": " + link)
 					elif not link.startswith("http") and self.isValidHtmlPage(link): # if linking to internal website without explicit domain name
