@@ -7,4 +7,8 @@ class crawlerHTMLParser(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         if tag == 'a':
+            for name, val in attrs:
+                if name == 'href':
+                    self.links.append(val)
+                    break
 
