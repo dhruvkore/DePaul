@@ -1,13 +1,17 @@
+# Dhruv Kore
+# CSC 575 Loop
+# Web Crawler and Search Engine
+
+import re
+
 from urllib import request
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 
-from queue import *
 from Crawler.crawler_HTMLParser import crawlerHTMLParser
-
 from Crawler.invertedIndex import invertedIndex
 
-import re
+from queue import *
 
 
 class crawler:

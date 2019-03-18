@@ -1,10 +1,15 @@
+# Dhruv Kore
+# CSC 575 Loop
+# Web Crawler and Search Engine
+
 import csv
 import sys
 import csv
 import math
 import re
-import nltk
 import operator
+import nltk
+
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
 

@@ -1,3 +1,7 @@
+# Dhruv Kore
+# CSC 575 Loop
+# Web Crawler and Search Engine
+
 from html.parser import HTMLParser
 
 class crawlerHTMLParser(HTMLParser):

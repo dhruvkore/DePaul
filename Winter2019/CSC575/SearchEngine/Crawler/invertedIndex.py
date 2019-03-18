@@ -1,3 +1,7 @@
+# Dhruv Kore
+# CSC 575 Loop
+# Web Crawler and Search Engine
+
 import nltk
 
 from nltk.tokenize import word_tokenize, wordpunct_tokenize
