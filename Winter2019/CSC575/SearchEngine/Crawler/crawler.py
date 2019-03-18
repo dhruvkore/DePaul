@@ -1,5 +1,6 @@
 from urllib import request
 from bs4 import BeautifulSoup
+from urllib.parse import urlparse
 
 from queue import *
 from Crawler.crawler_HTMLParser import crawlerHTMLParser
@@ -48,18 +49,22 @@ class crawler:
 
 				visited.add(website)
 
+				# searchDomain = urlparse(self.site).hostname
+				# print("Search Domain: " + searchDomain)
+
 				for link in myparser.links:
-					if link.startswith(self.site) and self.isValidHtmlPage(link):
+					# if link.startswith(self.site) and self.isValidHtmlPage(link):
+					if not link.startswith("/") and "depaul.edu" in urlparse(self.site).hostname and self.isValidHtmlPage(link): # DePaul domain constrain required in prompt
 						queue.put(link)
 						# print(str(numOfSites) + ": " + link)
-					elif not link.startswith("http") and self.isValidHtmlPage(link):
+					elif not link.startswith("http") and self.isValidHtmlPage(link): # if linking to internal website without explicit domain name
 						queue.put(self.site + link)
 						# print(str(numOfSites) + ": " + self.site[:-1] + link)
 					# print(link)
 				print(str(numOfSites) + ": " + website)
 
 				numOfSites += 1
-			except:
+			except: # if domain redirects or is invalid, rejects domain name
 				print("Exception on:" + website)
 				visited.add(website)
 
@@ -96,7 +101,7 @@ class crawler:
 		return True
 
 def main():
-	c = crawler('https://www.depaul.edu', 10)
+	c = crawler('https://www.depaul.edu', 5000)
 	c.crawl()
 
 if __name__ == "__main__":
