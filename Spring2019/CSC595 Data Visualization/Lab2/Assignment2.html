@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
+        
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        
+
+        <script>
+        	function draw(){
+        		drawbar();
+
+        		drawline();
+
+        		drawscatter();
+        	}
+
+        	function drawbar(){
+        		var data = [50, 100, 170, 230, 220, 280, 240, 120, 300, 230, 120, 110, 
+        					210, 190, 180, 140, 90, 140, 190, 120, 150, 210, 130, 90]
+
+        		var canvas = d3.select("#bar")
+
+        		var w = 500;
+        		var h = 300;
+
+        		var barPadding = 1;
+
+        		canvas.selectAll("empty")
+        			.data(data)
+        			.enter()
+        			.append("rect")
+        			.attr("x", function(d, i){
+        				return i * (w / data.length - barPadding);
+        			})
+        			.attr("y", function(d){
+        				return h - d;
+        			})
+        			.attr("width", 20)
+        			.attr("height", function(d){
+        				return d * 5;
+        			})
+        			.attr("fill", function(d){
+        				return "rgb(0, 0, " + (d) + ")";
+        			});
+        	}
+
+        	function drawline(){
+        		var data = [50, 100, 170, 230, 220, 280, 240, 120, 300, 230, 120, 110, 
+        					210, 190, 180, 140, 90, 140, 190, 120, 150, 210, 130, 90]
+
+        		var canvas = d3.select("#line")
+
+        		var w = 500;
+        		var h = 300;
+
+        		var previousX = 0;
+        		var previousY = 300;
+
+        		var barPadding = 1;
+
+        		canvas.selectAll("empty")
+        			.data(data)
+        			.enter()
+        			.append("line")
+	        			.attr("x1", function(d, i){
+	        				var prevX = 0;
+	        				if(i == 0){
+	        					prevX = 0;
+	        				}
+	        				else{
+	        					prevX = (i - 1) * (w / data.length - barPadding);
+	        				}
+	        				return prevX;
+	        			})
+	        			.attr("y1", function(d, i){
+	        				var prevY = 300;
+	        				if (i == 0) {
+	        					prevY = 300;
+	        				}
+	        				else{
+	        					prevY = h - data[i - 1];
+	        				}
+	        				return prevY;
+	        			})
+	        			.attr("x2", function(d, i){
+	        				var previousX = i * (w / data.length - barPadding);
+	        				return i * (w / data.length - barPadding);
+	        			})
+	        			.attr("y2", function(d){
+	        				var previousY = h - d;
+	        				return h - d;
+	        			})
+	        			.attr("stroke", function(d){
+	        				return "rgb(0, 0, " + (d) + ")";
+	        			});
+
+        	}
+
+        	function drawscatter(){
+        		var data = [50, 100, 170, 230, 220, 280, 240, 120, 300, 230, 120, 110, 
+        					210, 190, 180, 140, 90, 140, 190, 120, 150, 210, 130, 90]
+
+        		var canvas = d3.select("#scatter")
+
+        		var w = 500;
+        		var h = 300;
+
+        		var barPadding = 1;
+
+        		canvas.selectAll("empty")
+        			.data(data)
+        			.enter()
+        			.append("circle")
+        			.attr("cx", function(d, i){
+        				return i * (w / data.length - barPadding);
+        			})
+        			.attr("cy", function(d){
+        				return h - d;
+        			})
+        			.attr("r", 5)
+        			.attr("fill", function(d){
+        				return "rgb(0, 0, " + (d) + ")";
+        			});
+
+        	}
+        </script>
+
+        <title>Now Let's Try D3</title>
+    </head>
+    <body onload="draw()">
+        <h1>Here is a bar chart</h1>
+
+        <svg id="bar" height="300" width="500">
+            <g class="barAxis" style="stroke: black">
+                <line x1="1" y1="300" x2="500" y2="300" />
+                <line x1="1" y1="1" x2="1" y2="500" />
+            </g>
+        </svg>
+
+        <h1>Here is a line graph</h1>
+
+        <svg id="line" height="300" width="500">
+            <g class="lineAxis" style="stroke: black">
+                <line x1="1" y1="300" x2="500" y2="300" />
+                <line x1="1" y1="1" x2="1" y2="500" />
+            </g>
+        </svg>
+
+		<h1>Here is a scatter chart</h1>
+
+        <svg id="scatter" height="300" width="500">
+            <g class="scatterAxis" style="stroke: black">
+                <line x1="1" y1="300" x2="500" y2="300" />
+                <line x1="1" y1="1" x2="1" y2="500" />
+            </g>
+        </svg>
+    
+    </body>
+    </html>

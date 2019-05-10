@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Ceci n'est pas un document HTML</title>
+
+		<style>
+			circle {
+				fill: Yellow;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Hello World!</h1>
+
+		<svg width="400" height="400">
+			<ellipse cx="200" cy="100" rx="100" ry="50" style="fill:blue; stroke:green; stroke-width:5px"/>
+			<rect x="50" y="50" width="200" height="100" style="fill:red; stroke:black; stroke-width:3px"/>
+			<circle cx="200" cy="100" r="50" style="stroke:black; stroke-width:5px"/>
+		</svg>
+
+		<svg width="400" height="400" >
+			<g class="mygroup" style="stroke: black">
+				<line x1="50" y1="0" x2="50" y2="300" />
+				<line x1="50" y1="300" x2="350" y2="300" />
+			</g>
+			<path d="M 50 50 L 100 20 L 200 200 C 200 200 300 50 400 50" style="stroke: blue; fill:none"/>
+		</svg>
+	</body>
+</html>

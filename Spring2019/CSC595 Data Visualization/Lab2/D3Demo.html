@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        
+        <link rel="stylesheet" href="D3Demo.css">
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+
+        <script>
+        	function draw(){
+        		var data = [50, 100, 170, 230, 220, 280, 240, 120, 300, 230, 120, 110, 210, 190, 180, 140, 90, 140, 190, 120, 150, 210, 130, 90];
+
+
+                var barPadding = 1;
+                var w = 500;
+                var h = 300;
+                var previousX = 0;
+                var PreviousY = 300;
+
+        		var canvas = d3.select("#canvas")
+
+        		canvas.selectAll("empty").data(data).enter()
+        			.append("rect")
+        				.attr({
+                            x: function(d, i) { return i * (w / dataset.length); }, 
+                            y: function(d) { return h - (d * 4); },
+                            width: w / dataset.length - barPadding,
+                            height: function(d) { return d * 4; },
+                            fill: function(d) { return "rgb(0, 0, " + (d * 10) + ")"; }
+                        }); 
+        	}
+        </script>
+
+        <title>Now Let's Try D3</title>
+    </head>
+    <body onload="draw()">
+        <h1>Here is an SVG box we can use D3 to change</h1>
+
+        <svg id="canvas" height="500" width="500">
+
+        </svg>
+
+        <svg height="500" width="500">
+            <polygon class="redstar" points="100,10 40,198 190,78 10,78 160,198"/>
+        </svg>
+
+
+    </body>
+</html>

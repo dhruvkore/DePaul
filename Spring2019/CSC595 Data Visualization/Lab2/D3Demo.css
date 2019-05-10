@@ -1,0 +1,12 @@
+.greenstar{
+	fill:lime;
+	stroke:purple;
+	stroke-width:5;
+	fill-rule:evenodd;
+}
+.redstar{
+	fill:red;
+	stroke:purple;
+	stroke-width:5;
+	fill-rule:evenodd;
+}
