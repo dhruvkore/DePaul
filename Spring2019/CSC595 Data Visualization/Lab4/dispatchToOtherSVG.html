@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Repurposing Other people's d3 Projects</title>
+    <style>
+      svg {
+        font: 10px sans-serif;
+      }
+
+      a:hover tspan:first-child {
+        text-decoration: underline;
+      }
+
+      tspan:last-child {
+        font-size: 9px;
+        fill-opacity: 0.7;
+      }
+    </style>
+
+</head>
+<body>
+    <div>
+      <p>
+        Note: I was having a very difficult time linking two visuals that would actuallly have value. If a blue rectangle in clicked in the first visual, the second visual with take that coordinate as a starting point and create a random path.
+      </p>
+    </div>
+
+    <svg id="polygonMap" width="960" height="600"></svg>
+    <svg id="madeup" width="200" height="200"></svg>
+    <canvas id="path" width="960" height="500"></canvas>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="polygonMapFunction.js"></script>
+    <script src="colorfulWalkFunction.js"></script>
+
+    <script src="walkPoints.csv.js"></script>
+    <script src="mapShapes.csv.js"></script>
+    <script>
+      var polygonData = d3.csvParse(d3mapShapesCSVText,
+                                    function(d) {
+                                      d.x = +d.x;
+                                      d.y = +d.y;
+                                      d.width = +d.width;
+                                      d.height = +d.height;
+                                      return d;
+                                    })
+
+
+      var polygonMap = d3.select("#polygonMap")
+      var walkPath = document.querySelector("canvas")
+
+      var PGOM = PolyGonOverMap()
+
+      //Just draws Blue Squares form CSV on top of the map
+      PGOM.createPolygonOverMap(polygonMap, polygonData)
+
+      var CW = ColorfulWalk()
+
+      CW.colorfulWalk(walkPath, 0, 0)
+
+      PGOM.dispatch.on("clicked",
+        function(){
+          var coordinates= d3.mouse(d3.event.currentTarget);
+          var x = coordinates[0];
+          var y = coordinates[1];
+
+          CW.colorfulWalk(walkPath, x, y);
+        });
+
+    </script>
+</body>
+</html>

@@ -1,6 +1,5 @@
 package Quotes;
 
-import Quotes.QuoteService;
 import javax.xml.ws.Endpoint;
 
 public class QuotePublisher {
