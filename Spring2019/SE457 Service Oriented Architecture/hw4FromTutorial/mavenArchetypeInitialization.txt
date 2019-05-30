@@ -1,0 +1,10 @@
+mvn archetype:generate -DarchetypeArtifactId=jersey-quickstart-grizzly2 \
+-DarchetypeGroupId=org.glassfish.jersey.archetypes -DinteractiveMode=false \
+-DgroupId=edu.se457 -DartifactId=PaymentService -Dpackage=edu.se457 \
+-DarchetypeVersion=2.28
+
+mvn archetype:generate -DarchetypeArtifactId=jersey-quickstart-grizzly2 \
+-DarchetypeGroupId=org.glassfish.jersey.archetypes -DinteractiveMode=false \
+-DgroupId=edu.se457 -DartifactId=UserAuthenticationService -Dpackage=edu.se457 \
+-DarchetypeVersion=2.28
+
